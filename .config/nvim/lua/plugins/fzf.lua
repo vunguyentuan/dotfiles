@@ -11,7 +11,7 @@ return {
     { "<leader><space>", "<cmd>FzfLua buffers<cr>",    desc = "Switch Buffer" },
     { "<leader>f",       "<cmd>FzfLua files<cr>",      desc = "File files" },
     { "<leader>ss",      "<cmd>FzfLua live_grep<cr>",  desc = "Live grep" },
-    { "<leader>gs",      "<cmd>FzfLua git_status<cr>", desc = "Git status" },
+    { "<leader>gg",      "<cmd>FzfLua git_status<cr>", desc = "Git status" },
   },
   config = function()
     -- calling `setup` is optional for customization

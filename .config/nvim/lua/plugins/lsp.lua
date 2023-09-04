@@ -56,17 +56,19 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>a", "<cmd>Lspsaga code_action<CR>")
 
       nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-      nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+      nmap('gr', function()
+        require('fzf-lua').lsp_references({ ignore_current_line = true })
+      end, '[G]oto [R]eferences')
       nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
       nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-      nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-      nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-        '[W]orkspace [S]ymbols')
+      -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+      -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+      --   '[W]orkspace [S]ymbols')
 
       -- See `:help K` for why this keymap
       -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
 
-      vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)
+      vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>')
       nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
       -- Lesser used LSP functionality

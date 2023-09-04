@@ -22,7 +22,7 @@ return {
       nvimtree = true,
       octo = true,
       telescope = {
-        enabled = true,
+        enabled = false,
         -- style = "nvchad"
       },
 

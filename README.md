@@ -10,8 +10,5 @@ Install packages & apps with this cmd
 brew bundle
 ```
 
-In dotfiles dir, run 
-
-```
-stow --verbose --target=$HOME */
-```
+docs
+https://www.atlassian.com/git/tutorials/dotfiles
