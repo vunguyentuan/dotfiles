@@ -2,6 +2,7 @@ return {
   -- navigation
   'nvim-tree/nvim-tree.lua',
   keys = { "<C-n>" },
+  enabled = false,
   config = function()
     vim.g.nvim_tree_disable_window_picker = 1
     vim.g.nvim_tree_highlight_opened_files = 2

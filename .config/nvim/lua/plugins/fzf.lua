@@ -18,6 +18,12 @@ return {
     require("fzf-lua").setup({
       -- 'telescope'
       -- 'max-perf'
+      fullscreen = true,
+      keymap = {
+        fzf = {
+          ['ctrl-q'] = 'select-all+accept',
+        },
+      },
     })
   end
 

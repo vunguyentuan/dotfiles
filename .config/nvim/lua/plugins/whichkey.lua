@@ -4,6 +4,12 @@ return
   version = false,
   event = "VeryLazy",
   config = function()
+    local minifiles = require('mini.files')
+    minifiles.setup()
+    vim.keymap.set('n', "<C-n>", function()
+      minifiles.open(vim.api.nvim_buf_get_name(0))
+    end, { desc = "Open files" })
+
     local miniclue = require('mini.clue')
     miniclue.setup({
       triggers = {
