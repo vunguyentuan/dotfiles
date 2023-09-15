@@ -20,6 +20,7 @@ return {
       noice = true,
       notify = true,
       nvimtree = true,
+      flash = true,
       octo = true,
       telescope = {
         enabled = false,
