@@ -54,3 +54,4 @@ vim.o.termguicolors = true
 -- change the default shell
 vim.o.shell = '/bin/bash'
 
+vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'

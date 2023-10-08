@@ -1,13 +1,14 @@
 live_config_reload: true
 env:
-  TERM: xterm-256color
+  TERM: screen-256color
 
-shell:
-  program: /bin/zsh
-  args:
-    - -l
-    - -c
-    - "tmux attach || tmux new-session -s main"
+
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - -l
+#     - -c
+#     - "tmux attach || tmux new-session -s main"
 
 window:
   dynamic_padding: false
@@ -21,7 +22,7 @@ window:
 
   decorations: buttonless
 
-  opacity: 0.90
+  opacity: 1.0
 
   startup_mode: Windowed
 

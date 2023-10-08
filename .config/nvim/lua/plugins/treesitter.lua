@@ -1,19 +1,23 @@
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
-  event = { "BufReadPost", "BufNewFile" },
+  event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
-    'windwp/nvim-ts-autotag'
+    'gungun974/nvim-ts-autotag',
   },
   build = ':TSUpdate',
   config = function()
     -- [[ Configure Treesitter ]]
     -- See `:help nvim-treesitter`
     require('nvim-treesitter.configs').setup {
+      modules = {},
+
       -- Add languages to be installed here that you want installed for treesitter
       ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+      ignore_install = {},
+      sync_install = false,
 
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = false,
@@ -81,5 +85,5 @@ return {
     -- setup code folding
     -- vim.opt.foldmethod = 'expr'
     -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-  end
+  end,
 }

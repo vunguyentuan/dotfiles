@@ -1,38 +1,38 @@
 return {
   -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  event = { "BufReadPre", "BufNewFile" },
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
 
-    'yioneko/nvim-vtsls',
+    -- 'yioneko/nvim-vtsls',
 
     -- Useful status updates for LSP
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+    { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
-    'nvimdev/lspsaga.nvim'
+    'nvimdev/lspsaga.nvim',
   },
   config = function()
     -- configure lsp saga
-    require('lspsaga').setup({
+    require('lspsaga').setup {
       ui = {
         border = 'rounded',
       },
       symbol_in_winbar = {
-        enable = false
+        enable = true,
       },
       lightbulb = {
-        enable = false
+        enable = false,
       },
       outline = {
-        layout = 'float'
-      }
-    })
+        layout = 'float',
+      },
+    }
 
     -- [[ Configure LSP ]]
     --  This function gets run when an LSP connects to a particular buffer.
@@ -53,11 +53,13 @@ return {
 
       -- nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
       -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-      vim.keymap.set({ "n", "v" }, "<leader>a", "<cmd>Lspsaga code_action<CR>")
+      vim.keymap.set({ 'n', 'v' }, '<leader>a', '<cmd>Lspsaga code_action<CR>')
 
-      nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+      vim.keymap.set({ 'n', 'v' }, '<leader>rn', '<cmd>Lspsaga rename<CR>')
+
+      nmap('gd', '<cmd>Lspsaga goto_definition<CR>', '[G]oto [D]efinition')
       nmap('gr', function()
-        require('fzf-lua').lsp_references({ ignore_current_line = true })
+        require('fzf-lua').lsp_references { ignore_current_line = true }
       end, '[G]oto [R]eferences')
       nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
       nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
@@ -96,6 +98,8 @@ return {
       -- pyright = {},
       -- rust_analyzer = {},
       -- tsserver = {},
+      cssls = {},
+      cssmodules_ls = {},
       vtsls = {},
       -- biome = {},
 
@@ -131,12 +135,13 @@ return {
       end,
     }
 
+    -- require('lspconfig').biome.setup {}
 
     -- require("lspconfig.configs").vtsls = require("vtsls")
     -- 		.lspconfig -- set default server config, optional but recommended
 
-
-    require("lspconfig").vtsls.setup({ --[[ your custom server config here ]] })
+    require('lspconfig').vtsls.setup { --[[ your custom server config here ]]
+    }
 
     -- Automatically format files on save
 
@@ -204,5 +209,5 @@ return {
     --     })
     --   end,
     -- })
-  end
+  end,
 }
