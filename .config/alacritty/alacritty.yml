@@ -20,17 +20,17 @@ window:
     x: 25
     y: 10
 
-  decorations: buttonless
+  # decorations: buttonless
 
   opacity: 1.0
 
-  startup_mode: Windowed
+  # startup_mode: Windowed
 
   # Window title
   title: Alacritty
 
   # Allow terminal applications to change Alacritty's window title.
-  dynamic_title: true
+  # dynamic_title: true
 
 # Font configuration
 font:
@@ -95,13 +95,13 @@ key_bindings:
   - { key: C,              mods: Command,                    action: Copy                   }
   - { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection         }
   - { key: H,              mods: Command,                    action: Hide                   }
-  - { key: H,              mods: Command|Alt,                action: HideOtherApplications  }
+  # - { key: H,              mods: Command|Alt,                action: HideOtherApplications  }
   - { key: M,              mods: Command,                    action: Minimize               }
   - { key: Q,              mods: Command,                    action: Quit                   }
   - { key: T,              mods: Command,                    chars: "\x01c"                 }
   - { key: L,              mods: Command,                    chars: "\x01L"                 }
-  - { key: P,              mods: Command|Shift,              chars: ":Telescope commands\n" }
-  - { key: P,              mods: Command,                    chars: ":Telescope find_files hidden=true\n" }
+  - { key: P,              mods: Command|Shift,              chars: ":FzfLua commands\n" }
+  - { key: P,              mods: Command,                    chars: ":FzfLua files\n" }
   - { key: S, mods: Command, chars: "\x1b\x3a\x77\x0a" } # save vim buffer
   - { key: G, mods: Command, chars: "\x01g" } # open git manager 'jesseduffield/lazygit'
   - { key: J, mods: Command, chars: "\x01\x54" }
@@ -111,7 +111,7 @@ key_bindings:
   - { key: F,              mods: Command|Control,            action: ToggleFullscreen       }
   - { key: F,              mods: Command, mode: ~Search,     action: SearchForward          }
   - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward         }
-  - { key: Return,         mods: Command,                    action: ToggleSimpleFullscreen }
+  # - { key: Return,         mods: Command,                    action: ToggleSimpleFullscreen }
 
   - { key: Key1, mods: Command, chars: "\x011" } # select tmux window 1
   - { key: Key2, mods: Command, chars: "\x012" } #                ... 2
