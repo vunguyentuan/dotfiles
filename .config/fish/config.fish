@@ -19,15 +19,19 @@ alias cat="bat"
 alias tree="exa --tree"
 alias ls="exa"
 alias docker-up="colima start"
-alias php_decode="php /Users/vunguyen/Projects/Temp/PHPDeobfuscator/index.php -f"
-alias config='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
-alias config='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias php_decode="php $HOME/Projects/Temp/PHPDeobfuscator/index.php -f"
+
+if test (uname) = Darwin
+  alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
+  alias config='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+else
+  alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+end
 
 # bun
-set -Ux BUN_INSTALL "/Users/vunguyen/.bun"
-fish_add_path "/Users/vunguyen/.bun/bin"
-fish_add_path "/Users/vunguyen/.local/bin"
+set -Ux BUN_INSTALL "$HOME/.bun"
+fish_add_path "$HOME/.bun/bin"
+fish_add_path "$HOME/.local/bin"
 
 # rust
 fish_add_path "$HOME/.cargo/bin"
@@ -35,29 +39,30 @@ fish_add_path "$HOME/.cargo/bin"
 # android
 fish_add_path "$HOME/Library/Android/sdk/platform-tools"
 
-# python
-fish_add_path "$(brew --prefix python)/libexec/bin"
 
-# php
-fish_add_path "/Applications/MAMP/bin/php/php8.2.0/bin"
-fish_add_path /Applications/MAMP/bin/php
+if test (uname) = Darwin
+  # python
+  fish_add_path "$(brew --prefix python)/libexec/bin"
+  # php
+  fish_add_path "/Applications/MAMP/bin/php/php8.2.0/bin"
+  fish_add_path /Applications/MAMP/bin/php
+  # aws cli
+  fish_add_path "$HOME/Library/Python/3.11/bin"
+  # pnpm
+  set -gx PNPM_HOME $HOME/Library/pnpm
+  set -gx PATH "$PNPM_HOME" $PATH
+  # pnpm end
+end
+
 
 # aws cli
-fish_add_path "$HOME/Library/Python/3.11/bin"
-
-# pnpm
-set -gx PNPM_HOME /Users/vunguyen/Library/pnpm
-set -gx PATH "$PNPM_HOME" $PATH
-# pnpm end
-
-# aws cli
-# set -gx AWS_CLI_HOME /Users/vunguyen/aws-cli
+# set -gx AWS_CLI_HOME $HOME/aws-cli
 # set -gx PATH "$AWS_CLI_HOME" $PATH
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# if test -f /Users/vunguyen/miniconda3/bin/conda
-#     eval /Users/vunguyen/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+# if test -f $HOME/miniconda3/bin/conda
+#     eval $HOME/miniconda3/bin/conda "shell.fish" "hook" $argv | source
 # end
 # <<< conda initialize <<<
 #
