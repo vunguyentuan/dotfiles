@@ -4,7 +4,7 @@ return {
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-context',
+    -- 'nvim-treesitter/nvim-treesitter-context',
     'gungun974/nvim-ts-autotag',
   },
   build = ':TSUpdate',

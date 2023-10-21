@@ -1,6 +1,6 @@
 live_config_reload: true
 env:
-  TERM: screen-256color
+  TERM: xterm-256color
 
 
 # shell:
@@ -20,7 +20,7 @@ window:
     x: 25
     y: 10
 
-  # decorations: buttonless
+  decorations: buttonless
 
   opacity: 1.0
 
@@ -31,8 +31,8 @@ window:
 
   # Allow terminal applications to change Alacritty's window title.
   # dynamic_title: true
-
-# Font configuration
+  option_as_alt: Both
+    # Font configuration
 font:
   normal:
     family: JetBrainsMono Nerd Font
@@ -51,7 +51,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 12.0
+  size: 16.0
 
   builtin_box_drawing: false
 

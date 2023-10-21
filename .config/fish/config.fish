@@ -3,8 +3,6 @@ if status is-interactive
 end
 
 starship init fish | source
-fnm env --use-on-cd | source
-fnm completions --shell fish | source
 
 set -gx EDITOR "hx" # or "vim", or "code", etc.
 

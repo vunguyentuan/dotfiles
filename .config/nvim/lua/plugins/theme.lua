@@ -1,12 +1,13 @@
 return {
   -- Theme inspired by Atom
   'catppuccin/nvim',
-  name = "catppuccin",
+  name = 'catppuccin',
+  enabled = true,
   lazy = false,
   priority = 1000,
   ---@class CatppuccinOptions
   opts = {
-    flavour = "mocha",
+    flavour = 'mocha',
     transparent_background = true,
 
     integrations = {
@@ -45,29 +46,29 @@ return {
       native_lsp = {
         enabled = true,
         virtual_text = {
-          errors = { "italic" },
-          hints = { "italic" },
-          warnings = { "italic" },
-          information = { "italic" },
+          errors = { 'italic' },
+          hints = { 'italic' },
+          warnings = { 'italic' },
+          information = { 'italic' },
         },
         underlines = {
-          errors = { "underline" },
-          hints = { "underline" },
-          warnings = { "underline" },
-          information = { "underline" },
+          errors = { 'underline' },
+          hints = { 'underline' },
+          warnings = { 'underline' },
+          information = { 'underline' },
         },
       },
     },
     color_overrides = {
       all = {
-        surface0 = "#444444",
-        surface1 = "#666666",
-        surface2 = "#a3a7bc",
-        surface3 = "#a3a7bc",
+        surface0 = '#444444',
+        surface1 = '#666666',
+        surface2 = '#a3a7bc',
+        surface3 = '#a3a7bc',
       },
     },
   },
   config = function()
-    vim.cmd.colorscheme("catppuccin")
-  end
+    vim.cmd.colorscheme 'catppuccin'
+  end,
 }
