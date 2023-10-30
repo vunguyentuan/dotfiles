@@ -65,23 +65,23 @@ return {
       symbol = '│',
     }
     require('mini.pairs').setup()
-    require('mini.pick').setup {
-      options = {
-        use_cache = true,
-      },
-      mappings = {
-        move_down = '<C-j>',
-        move_up = '<C-k>',
-      },
-      window = {
-        config = win_config,
-      },
-    }
+    -- require('mini.pick').setup {
+    --   options = {
+    --     use_cache = true,
+    --   },
+    --   mappings = {
+    --     move_down = '<C-j>',
+    --     move_up = '<C-k>',
+    --   },
+    --   window = {
+    --     config = win_config,
+    --   },
+    -- }
 
-    keymap('n', '<leader>f', '<cmd>lua MiniPick.builtin.files()<cr>', { noremap = true, silent = true, desc = 'Find File' })
+    -- keymap('n', '<leader>f', '<cmd>lua MiniPick.builtin.files()<cr>', { noremap = true, silent = true, desc = 'Find File' })
     -- keymap('n', '<leader>fm', '<cmd>lua MiniFiles.open()<cr>', { noremap = true, silent = true, desc = 'Find Manualy' })
-    keymap('n', '<leader><space>', '<cmd>lua MiniPick.builtin.buffers()<cr>', { noremap = true, silent = true, desc = 'Find Buffer' })
-    keymap('n', '<leader>ss', '<cmd>lua MiniPick.builtin.grep_live()<cr>', { noremap = true, silent = true, desc = 'Find String' })
+    -- keymap('n', '<leader><space>', '<cmd>lua MiniPick.builtin.buffers()<cr>', { noremap = true, silent = true, desc = 'Find Buffer' })
+    -- keymap('n', '<leader>ss', '<cmd>lua MiniPick.builtin.grep_live()<cr>', { noremap = true, silent = true, desc = 'Find String' })
 
     -- keymap('n', '<leader>ss', '<cmd>lua MiniSessions.select()<cr>', { noremap = true, silent = true, desc = 'Switch Session' })
 
