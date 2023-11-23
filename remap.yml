@@ -1,0 +1,22 @@
+# modmap:
+#   - name: Map super as ctrl
+#     application:
+#       only: google-chrome
+#     remap:
+#       Super_L: CTRL_L
+keymap:
+  - name: Chrome
+    application:
+      not: Alacritty
+    remap:
+      Super-t: C-t
+      Super-c: C-c
+      Super-v: C-v
+      Super-w: C-w
+      Super-a: C-a
+      Super-r: C-r
+      Super-z: C-z
+      Super-e: C-e
+      Super-backspace: C-backspace
+      Super-Left: C-Left
+      Super-Right: C-Right
