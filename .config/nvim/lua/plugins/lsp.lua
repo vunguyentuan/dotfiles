@@ -76,6 +76,9 @@ return {
       -- pyright = {},
       -- rust_analyzer = {},
       -- tsserver = {},
+
+      emmet_language_server = {},
+      tailwindcss = {},
       cssls = {},
       cssmodules_ls = {},
       vtsls = {},
