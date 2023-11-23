@@ -79,12 +79,10 @@ key_bindings:
   - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
   - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop    }
   - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
-  - { key: Left,      mods: Alt,                        chars: "\x1bb"         }
-  - { key: Right,     mods: Alt,                        chars: "\x1bf"         }
 
   # (macOS only)
-  - { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                  }
-  - { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory           }
+  # - { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                  }
+  # - { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory           }
   - { key: Key0,           mods: Command,                    action: ResetFontSize          }
   - { key: Equals,         mods: Command,                    action: IncreaseFontSize       }
   - { key: Plus,           mods: Command,                    action: IncreaseFontSize       }
@@ -99,6 +97,9 @@ key_bindings:
   - { key: M,              mods: Command,                    action: Minimize               }
   - { key: Q,              mods: Command,                    action: Quit                   }
   - { key: T,              mods: Command,                    chars: "\x01c"                 }
+  - { key: L,              mods: Control|Shift,                    chars: "\x01v"                 }
+  - { key: J,              mods: Control|Shift,                    chars: "\x01s"                 }
+  - { key: K,              mods: Command,                    chars: "\x01w"                 }
   - { key: L,              mods: Command,                    chars: "\x01L"                 }
   - { key: P,              mods: Command|Shift,              chars: ":FzfLua commands\n" }
   - { key: P,              mods: Command,                    chars: ":FzfLua files\n" }
@@ -106,10 +107,10 @@ key_bindings:
   - { key: G, mods: Command, chars: "\x01g" } # open git manager 'jesseduffield/lazygit'
   - { key: J, mods: Command, chars: "\x01\x54" }
   - { key: W,              mods: Command,                    chars: "\x01x"                 }
-  - { key: N,              mods: Command|Shift,                    action: SpawnNewInstance       }
+  # - { key: N,              mods: Command|Shift,                    action: SpawnNewInstance       }
   - { key: N,              mods: Command,                    chars: "\x0e"       }
   - { key: F,              mods: Command|Control,            action: ToggleFullscreen       }
-  - { key: F,              mods: Command, mode: ~Search,     action: SearchForward          }
+  - { key: F,              mods: Command, mode: ~Search,     chars: "\x01z"          }
   - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward         }
   # - { key: Return,         mods: Command,                    action: ToggleSimpleFullscreen }
 
@@ -126,6 +127,6 @@ key_bindings:
 import:
   # uncomment the flavour you want below:
   - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
-#  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
-#  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
-#  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
+ # - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+ # - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+ # - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
