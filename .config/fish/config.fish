@@ -13,6 +13,9 @@ set -Ux FZF_TMUX_OPTS "-p 55%,60%"
 alias nvm="fnm"
 alias vim="nvim"
 alias v="nvim"
+alias d="npm run dev"
+alias s="npm run start"
+alias b="npm run build"
 alias cat="bat"
 alias tree="exa --tree"
 alias ls="exa"
@@ -21,6 +24,7 @@ alias php_decode="php $HOME/Projects/Temp/PHPDeobfuscator/index.php -f"
 
 if test (uname) = Darwin
   alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
+  alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power -d"
   alias config='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 else
   alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'

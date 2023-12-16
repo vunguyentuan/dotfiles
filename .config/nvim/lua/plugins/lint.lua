@@ -4,16 +4,16 @@ return {
     local lint = require 'lint'
     lint.linters_by_ft = {
       javascript = {
-        'eslint_d',
+        'oxlint',
       },
       typescript = {
-        'eslint_d',
+        'oxlint',
       },
       javascriptreact = {
-        'eslint_d',
+        'oxlint',
       },
       typescriptreact = {
-        'eslint_d',
+        'oxlint',
       },
     }
   end,

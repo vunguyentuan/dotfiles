@@ -20,7 +20,7 @@ window:
     x: 25
     y: 10
 
-  decorations: buttonless
+  # decorations: buttonless
 
   opacity: 1.0
 

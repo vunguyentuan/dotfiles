@@ -20,12 +20,13 @@ select = "underline"
 
 [keys.normal]
 C-s = ":write"
+"#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
 
 # Some nice Helix stuff
-C-h = "select_prev_sibling"
-C-j = "shrink_selection"
-C-k = "expand_selection"
-C-l = "select_next_sibling"
+A-h = "select_prev_sibling"
+A-k = "shrink_selection"
+A-j = "expand_selection"
+A-l = "select_next_sibling"
 
 # Personal preference
 o = ["open_below", "normal_mode"]
