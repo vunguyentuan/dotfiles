@@ -20,8 +20,12 @@ return {
       sync_install = false,
 
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-      auto_install = false,
+      auto_install = true,
       autotag = {
+        enable = true,
+      },
+
+      matchup = {
         enable = true,
       },
 

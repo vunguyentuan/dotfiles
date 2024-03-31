@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(zoxide query -l | fzf)
+    selected=$(zoxide query -l | rg vunguyen/[^Library] | awk '{ print substr($0,match($0,"/[^/]*$")+1) "\t" $0 }' | fzf --with-nth=1 --bind 'ctrl-x:execute:less {2}' --no-sort | awk -F'\t' '{print $2}')
 fi
 
 if [[ -z $selected ]]; then
@@ -22,4 +22,6 @@ if ! tmux has-session -t=$selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c $selected
 fi
 
+
+zoxide add $selected
 tmux switch-client -t $selected_name

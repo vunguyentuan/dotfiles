@@ -4,9 +4,10 @@
 
 vim.loader.enable()
 
-require('settings')
-require('keymaps')
-require('autocmd')
+require 'settings'
+require 'keymaps'
+require 'filetype'
+-- require 'autocmd'
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -30,33 +31,32 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- require 'kickstart.plugins.debug',
-
-
   { import = 'plugins' },
 }, {
   defaults = {
-    lazy = false
+    lazy = false,
   },
+  -- Don't bother me when tweaking plugins.
+  change_detection = { notify = false },
   performance = {
     cache = {
       enabled = true,
     },
     reset_packpath = true, -- reset the package path to improve startup time
     rtp = {
-      reset = true,        -- reset the runtime path to $VIMRUNTIME and your config directory
+      reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
       ---@type string[]
-      paths = {},          -- add any custom paths here that you want to includes in the rtp
+      paths = {}, -- add any custom paths here that you want to includes in the rtp
       ---@type string[] list any plugins you want to disable here
       disabled_plugins = {
-        "gzip",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
+        'gzip',
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
       },
     },
   },

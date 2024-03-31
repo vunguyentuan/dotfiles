@@ -4,10 +4,18 @@ end
 
 starship init fish | source
 
-set -gx EDITOR "hx" # or "vim", or "code", etc.
+set -gx EDITOR "nvim" # or "vim", or "code", etc.
+
+# export GPG_TTY=$(tty)
+# export gpg tty for gpg-agent
+set -gx GPG_TTY (tty)
 
 set -gx NNN_OPENER "nnn-hx.sh"
 set -Ux FZF_TMUX_OPTS "-p 55%,60%"
+
+# fzf
+set -Ux FZF_DEFAULT_COMMAND "fd --type file --hidden --no-ignore"
+
 
 # alias
 alias nvm="fnm"
@@ -17,8 +25,8 @@ alias d="npm run dev"
 alias s="npm run start"
 alias b="npm run build"
 alias cat="bat"
-alias tree="exa --tree"
-alias ls="exa"
+alias tree="eza --tree"
+alias ls="eza"
 alias docker-up="colima start"
 alias php_decode="php $HOME/Projects/Temp/PHPDeobfuscator/index.php -f"
 
@@ -68,36 +76,6 @@ end
 # end
 # <<< conda initialize <<<
 #
-
-function nvim-chad
-    env NVIM_APPNAME=nvim-chad nvim
-end
-
-function nvim-lazy
-    env NVIM_APPNAME=nvim-lazy nvim
-end
-
-# function nvim-yum
-#     env NVIM_APPNAME=nvim-yum nvim
-# end
-# alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-# alias nvim-kick="NVIM_APPNAME=kickstart nvim"
-# alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-# alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-
-function nvims
-    set items nvim-lazy nvim-chad
-    set config (printf "%s\n" $items | fzf --prompt="? Neovim Config ? " --height=~50% --layout=reverse --border --exit-0)
-    if [ -z $config ]
-        echo "Nothing selected"
-        return 0
-    else if [ $config = default ]
-        set config ""
-    end
-    env NVIM_APPNAME=$config nvim $argv
-end
-
-bind \ca 'nvims\n'```
 
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 

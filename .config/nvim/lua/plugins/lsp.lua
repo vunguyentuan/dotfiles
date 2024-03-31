@@ -1,6 +1,7 @@
 return {
   -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
+  -- enabled = false,
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
@@ -13,35 +14,44 @@ return {
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
-    'nvimdev/lspsaga.nvim',
+    'folke/trouble.nvim',
+    -- 'yioneko/nvim-vtsls',
+    -- 'nvimdev/lspsaga.nvim',
+    -- 'pmizio/typescript-tools.nvim',
   },
   config = function()
-    -- configure lsp saga
-    require('lspsaga').setup {
-      ui = {
-        border = 'rounded',
-      },
-      symbol_in_winbar = {
-        enable = false,
-      },
-      lightbulb = {
-        enable = false,
-      },
-      outline = {
-        layout = 'float',
-        enable = false,
-      },
-    }
+    local on_attach = function(client, bufnr)
+      -- disable_formatting for typescript
+      -- if client.name == 'tsserver' or client.name == 'vtsls' then
+      --   client.resolved_capabilities.document_formatting = false
+      --   client.resolved_capabilities.document_range_formatting = false
+      -- end
 
-    -- [[ Configure LSP ]]
-    --  This function gets run when an LSP connects to a particular buffer.
-    local on_attach = function(_, bufnr)
-      -- NOTE: Remember that lua is a real programming language, and as such it is possible
-      -- to define small helper and utility functions so you don't have to repeat yourself
-      -- many times.
-      --
-      -- In this case, we create a function that lets us more easily define mappings specific
-      -- for LSP related items. It sets the mode, buffer and description for us each time.
+      -- run eslint fix on save
+      -- if client.name == 'eslint' then
+      --   vim.api.nvim_create_autocmd('BufWritePre', {
+      --     buffer = bufnr,
+      --     command = 'EslintFixAll',
+      --   })
+      -- end
+
+      if client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+        vim.api.nvim_clear_autocmds { buffer = bufnr, group = 'lsp_document_highlight' }
+        vim.api.nvim_create_autocmd('CursorHold', {
+          callback = vim.lsp.buf.document_highlight,
+          buffer = bufnr,
+          group = 'lsp_document_highlight',
+          desc = 'Document Highlight',
+        })
+        vim.api.nvim_create_autocmd('CursorMoved', {
+          callback = vim.lsp.buf.clear_references,
+          buffer = bufnr,
+          group = 'lsp_document_highlight',
+          desc = 'Clear All the References',
+        })
+      end
+
       local nmap = function(keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
@@ -51,23 +61,37 @@ return {
       end
 
       nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-      -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-      vim.keymap.set({ 'n', 'v' }, '<leader>a', '<cmd>Lspsaga code_action<CR>')
 
-      nmap('gd', '<cmd>Lspsaga goto_definition<CR>', '[G]oto [D]efinition')
+      -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+      vim.keymap.set({ 'n', 'v' }, '<leader>a', '<cmd>FzfLua lsp_code_actions<CR>')
+
+      nmap('gd', function()
+        require('fzf-lua').lsp_definitions {
+          sync = true,
+          jump_to_single_result = true,
+        }
+      end, '[G]oto [D]efinition')
+
       nmap('gr', function()
-        require('fzf-lua').lsp_references { ignore_current_line = true }
+        require('fzf-lua').lsp_references { ignore_current_line = true, includeDeclaration = false }
       end, '[G]oto [R]eferences')
       nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
       nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
-      vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>')
+      vim.keymap.set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>')
       nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
+      -- Diagnostic keymaps
+      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+
+      vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+      vim.keymap.set('n', '<leader>ww', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
       -- Create a command `:Format` local to the LSP buffer
-      vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
-      end, { desc = 'Format current buffer with LSP' })
+      -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+      --   vim.lsp.buf.format()
+      -- end, { desc = 'Format current buffer with LSP' })
     end
 
     local servers = {
@@ -81,8 +105,29 @@ return {
       tailwindcss = {},
       cssls = {},
       cssmodules_ls = {},
-      vtsls = {},
-      -- biome = {},
+      vtsls = {
+        format = { enable = false },
+      },
+
+      -- harper_ls = {},
+      eslint = {
+        enable = true,
+        format = { enable = false }, -- this will enable formatting
+        packageManager = 'npm',
+        autoFixOnSave = true,
+        settings = {
+          autoFixOnSave = true,
+        },
+        codeActionsOnSave = {
+          mode = 'all',
+          rules = { '!debugger', '!no-only-tests/*' },
+        },
+        lintTask = {
+          enable = true,
+        },
+      },
+
+      biome = {},
 
       lua_ls = {
         Lua = {
@@ -104,6 +149,7 @@ return {
 
     mason_lspconfig.setup {
       ensure_installed = vim.tbl_keys(servers),
+      automatic_installation = true,
     }
 
     mason_lspconfig.setup_handlers {
@@ -116,7 +162,17 @@ return {
       end,
     }
 
-    require('lspconfig').vtsls.setup { --[[ your custom server config here ]]
-    }
+    -- require('lspconfig').harper_ls.setup {}
+
+    -- typescript-tools
+    -- require('typescript-tools').setup {
+    --   settings = {
+    --     tsserver_file_preferences = {
+    --       includeInlayParameterNameHints = 'all',
+    --       includeCompletionsForModuleExports = true,
+    --       quotePreference = 'auto',
+    --     },
+    --   },
+    -- }
   end,
 }

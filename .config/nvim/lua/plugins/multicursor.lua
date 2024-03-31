@@ -1,42 +1,19 @@
-return
-{
-  "smoka7/multicursors.nvim",
-  event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter',
-    'smoka7/hydra.nvim',
-  },
-  opts = function()
-    local N = require 'multicursors.normal_mode'
-    local I = require 'multicursors.insert_mode'
-    return {
-      normal_keys = {
-        -- to change default lhs of key mapping change the key
-        [','] = {
-          -- assigning nil to method exits from multi cursor mode
-          method = N.clear_others,
-          -- you can pass :map-arguments here
-          opts = { desc = 'Clear others' },
-        },
-      },
-      insert_keys = {
-        -- to change default lhs of key mapping change the key
-        ['<CR>'] = {
-          -- assigning nil to method exits from multi cursor mode
-          method = I.Cr_method,
-          -- you can pass :map-arguments here
-          opts = { desc = 'New line' },
-        },
-      },
+return {
+  'mg979/vim-visual-multi',
+  event = 'VeryLazy',
+  enabled = false,
+  init = function()
+    vim.g.VM_maps = {}
+    vim.g.VM_maps = {
+      ['Find Under'] = '<C-m>',
     }
   end,
-  cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
-  keys = {
-    {
-      mode = { 'v', 'n' },
-      '<Leader>m',
-      '<cmd>MCstart<cr>',
-      desc = 'Create a selection for selected text or word under the cursor',
-    },
-  },
+  -- keys = {
+  --   {
+  --     mode = { 'v', 'n' },
+  --     '<Leader>m',
+  --     '<cmd>MCstart<cr>',
+  --     desc = 'Create a selection for selected text or word under the cursor',
+  --   },
+  -- },
 }

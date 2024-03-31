@@ -88,7 +88,7 @@ function keys.apply_to_config(config)
 
 				if relativeDir == nil then
 					win:perform_action(
-						act.SpawnCommandInNewWindow({
+						act.SpawnCommandInNewTab({
 							args = {
 								"/opt/homebrew/bin/lazygit",
 							},
@@ -100,12 +100,11 @@ function keys.apply_to_config(config)
 						pane
 					)
 
-					win:maximize()
 					return
 				end
 
 				win:perform_action(
-					act.SpawnCommandInNewWindow({
+					act.SpawnCommandInNewTab({
 						args = {
 							"/opt/homebrew/bin/lazygit",
 							relativeDir,
@@ -122,7 +121,8 @@ function keys.apply_to_config(config)
 		{
 			key = "s",
 			mods = "CMD",
-			action = wezterm.action.SendString(":w\r\n"),
+			action = wezterm.action.SendString("\x1b:w\r\n"),
+			-- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
 		},
 		{
 			key = "l",

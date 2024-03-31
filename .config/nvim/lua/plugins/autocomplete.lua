@@ -2,6 +2,7 @@ return {
   {
     'L3MON4D3/LuaSnip',
     build = (not jit.os:find 'Windows') and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp" or nil,
+    -- enabled = false,
     dependencies = {
       'rafamadriz/friendly-snippets',
       config = function()
@@ -31,18 +32,23 @@ return {
   {
     'hrsh7th/nvim-cmp',
     version = false, -- last release is way too old
+    -- enabled = false,
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'saadparwaiz1/cmp_luasnip',
+      'onsails/lspkind.nvim',
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       local defaults = require 'cmp.config.default'()
+
+      local lspkind = require 'lspkind'
+
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -77,6 +83,13 @@ return {
       return {
         completion = {
           completeopt = 'menu,menuone,noinsert',
+        },
+        formatting = {
+          format = lspkind.cmp_format {
+            mode = 'symbol',
+            max_width = 50,
+            symbol_map = { Copilot = '?' },
+          },
         },
         snippet = {
           expand = function(args)

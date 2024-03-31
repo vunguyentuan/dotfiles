@@ -20,9 +20,7 @@ return {
       neotest = true,
       noice = true,
       notify = true,
-      nvimtree = true,
       flash = true,
-      octo = true,
       telescope = {
         enabled = false,
         -- style = "nvchad"
@@ -31,18 +29,6 @@ return {
       treesitter = true,
       treesitter_context = true,
       symbols_outline = true,
-      illuminate = true,
-      which_key = true,
-      barbecue = {
-        dim_dirname = true,
-        bold_basename = true,
-        dim_context = false,
-        alt_background = false,
-      },
-      dap = {
-        enabled = true,
-        enable_ui = true,
-      },
       native_lsp = {
         enabled = true,
         virtual_text = {

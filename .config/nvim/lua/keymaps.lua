@@ -12,7 +12,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- save file with Ctrl + S
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-c>', 'gcc', { noremap = true, silent = true, desc = 'Toggle comments' })
+-- vim.keymap.set({ 'n', 'i', 'v' }, '<C-c>', 'gcc', { noremap = true, silent = true, desc = 'Toggle comments' })
 
 -- move line
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
@@ -35,11 +35,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>ww', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- track buffers and close unused
 local id = vim.api.nvim_create_augroup('startup', {

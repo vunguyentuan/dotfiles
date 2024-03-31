@@ -33,6 +33,22 @@ return {
       end,
       desc = '[H]arpoon to file 2',
     },
+
+    {
+      '<leader>ll',
+      function()
+        require('harpoon.ui').nav_file(3)
+      end,
+      desc = '[H]arpoon to file 3',
+    },
+
+    {
+      '<leader>;;',
+      function()
+        require('harpoon.ui').nav_file(4)
+      end,
+      desc = '[H]arpoon to file 4',
+    },
   },
   config = function()
     require('harpoon').setup {}

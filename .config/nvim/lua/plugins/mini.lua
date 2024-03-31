@@ -1,53 +1,18 @@
+local utils = require 'utils'
 return {
   'echasnovski/mini.nvim',
   version = false,
+  event = 'VeryLazy',
   dependencies = {
     'JoosepAlviste/nvim-ts-context-commentstring',
   },
   config = function()
-    local keymap = vim.api.nvim_set_keymap
-
-    local win_config = function()
-      local height = math.floor(0.618 * vim.o.lines)
-      local width = math.floor(0.618 * vim.o.columns)
-      return {
-        anchor = 'NW',
-        height = height,
-        width = width,
-        row = math.floor(0.5 * (vim.o.lines - height)),
-        col = math.floor(0.5 * (vim.o.columns - width)),
-        -- border = 'none',
-      }
-    end
-
-    -- require('mini.base16').setup {
-    --   palette = {
-    --     base00 = '#1d2021',
-    --     base01 = '#3c3836',
-    --     base02 = '#504945',
-    --     base03 = '#665c54',
-    --     base04 = '#bdae93',
-    --     base05 = '#d5c4a1',
-    --     base06 = '#ebdbb2',
-    --     base07 = '#fbf1c7',
-    --     base08 = '#fb4934',
-    --     base09 = '#fe8019',
-    --     base0A = '#fabd2f',
-    --     base0B = '#b8bb26',
-    --     base0C = '#8ec07c',
-    --     base0D = '#83a598',
-    --     base0E = '#d3869b',
-    --     base0F = '#d65d0e',
-    --   },
-    -- }
-
     require('mini.basics').setup {
       options = {
-        extra_ui = true,
-        win_borders = 'double',
+        extra_ui = false,
       },
       mappings = {
-        windows = true,
+        windows = false,
       },
     }
 
@@ -64,37 +29,10 @@ return {
       },
       symbol = '│',
     }
-    require('mini.pairs').setup()
-    -- require('mini.pick').setup {
-    --   options = {
-    --     use_cache = true,
-    --   },
-    --   mappings = {
-    --     move_down = '<C-j>',
-    --     move_up = '<C-k>',
-    --   },
-    --   window = {
-    --     config = win_config,
-    --   },
-    -- }
-
-    -- keymap('n', '<leader>f', '<cmd>lua MiniPick.builtin.files()<cr>', { noremap = true, silent = true, desc = 'Find File' })
-    -- keymap('n', '<leader>fm', '<cmd>lua MiniFiles.open()<cr>', { noremap = true, silent = true, desc = 'Find Manualy' })
-    -- keymap('n', '<leader><space>', '<cmd>lua MiniPick.builtin.buffers()<cr>', { noremap = true, silent = true, desc = 'Find Buffer' })
-    -- keymap('n', '<leader>ss', '<cmd>lua MiniPick.builtin.grep_live()<cr>', { noremap = true, silent = true, desc = 'Find String' })
-
-    -- keymap('n', '<leader>ss', '<cmd>lua MiniSessions.select()<cr>', { noremap = true, silent = true, desc = 'Switch Session' })
 
     require('mini.sessions').setup {
       autowrite = true,
     }
-    --
-    -- require('mini.starter').setup {
-    --   header = '███╗   ███╗██╗   ██╗██╗███╗   ███╗\n████╗ ████║██║   ██║██║████╗ ████║\n██╔████╔██║██║   ██║██║██╔████╔██║\n██║╚██╔╝██║╚██╗ ██╔╝██║██║╚██╔╝██║\n██║ ╚═╝ ██║ ╚████╔╝ ██║██║ ╚═╝ ██║\n╚═╝     ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝\n                                  ',
-    -- }
-
-    require('mini.surround').setup()
-    -- require('mini.tabline').setup()
 
     local minifiles = require 'mini.files'
     minifiles.setup {
@@ -113,10 +51,51 @@ return {
     }
     vim.keymap.set('n', '<C-n>', function()
       if not minifiles.close() then
-        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+        minifiles.open(vim.api.nvim_buf_get_name(0))
       end
       -- minifiles.open(vim.api.nvim_buf_get_name(-1))
     end, { desc = 'Open files' })
+
+    local function getWorkspaceEdit(client, old_name, new_name)
+      local will_rename_params = {
+        files = {
+          {
+            oldUri = vim.uri_from_fname(old_name),
+            newUri = vim.uri_from_fname(new_name),
+          },
+        },
+      }
+      local timeout_ms = 2000
+      local success, resp = pcall(client.request_sync, 'workspace/willRenameFiles', will_rename_params, timeout_ms)
+      if not success then
+        return nil
+      end
+      if resp == nil or resp.result == nil then
+        return nil
+      end
+      return resp.result
+    end
+
+    -- auto update import statements using lsp
+    vim.api.nvim_create_autocmd('User', {
+      -- pattern = { 'MiniFilesActionMove', 'MiniFilesActionRename' },
+      pattern = 'MiniFilesActionMove',
+      callback = function(args)
+        for _, client in pairs(vim.lsp.get_active_clients()) do
+          local will_rename = utils.get_nested_path(client, { 'server_capabilities', 'workspace', 'fileOperations', 'willRename' })
+          -- print(vim.inspect(will_rename))
+          if will_rename ~= nil then
+            local filters = will_rename.filters or {}
+            if utils.matches_filters(filters, args.data.from) then
+              local edit = getWorkspaceEdit(client, args.data.from, args.data.to)
+              if edit ~= nil then
+                vim.lsp.util.apply_workspace_edit(edit, client.offset_encoding)
+              end
+            end
+          end
+        end
+      end,
+    })
 
     require('mini.surround').setup {
       -- Module mappings. Use `''` (empty string) to disable one.
@@ -191,7 +170,7 @@ return {
         },
 
         -- Delay before showing clue window
-        delay = 0,
+        delay = 200,
 
         -- Keys to scroll inside the clue window
         scroll_down = '<C-d>',
@@ -204,21 +183,25 @@ return {
     -- text object
     require('mini.ai').setup()
 
+    require('ts_context_commentstring').setup {
+      enable_autocmd = false,
+    }
+
     require('mini.comment').setup {
       options = {
         custom_commentstring = function()
-          return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
+          return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
         end,
         ignore_blank_line = true,
       },
       mappings = {
         -- Toggle comment (like `gcip` - comment inner paragraph) for both
         -- Normal and Visual modes
-        -- comment = 'gc',
-        comment = '<C-c>',
+        comment = 'gc',
 
         -- Toggle comment on current line
         comment_line = '<C-c>',
+        comment_visual = '<C-c>',
 
         -- Define 'comment' textobject (like `dgc` - delete whole comment block)
         textobject = 'gc',

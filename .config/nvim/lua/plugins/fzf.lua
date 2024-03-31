@@ -14,16 +14,31 @@ return {
     { '<leader>gg', '<cmd>FzfLua git_status<cr>', desc = 'Git status' },
   },
   config = function()
-    -- calling `setup` is optional for customization
     require('fzf-lua').setup {
-      -- 'telescope'
-      -- 'max-perf'
-      fullscreen = true,
+      files = {
+        git_icons = false,
+        file_icons = false,
+      },
+
       keymap = {
         fzf = {
           ['ctrl-q'] = 'select-all+accept',
         },
       },
     }
+
+    -- calling `setup` is optional for customization
+    -- require('fzf-lua').setup {
+    --   -- 'telescope',
+    --   -- 'max-perf',
+    --   -- 'fzf-native',
+    --   -- 'default',
+    --   -- fullscreen = true,
+    --   keymap = {
+    --     fzf = {
+    --       ['ctrl-q'] = 'select-all+accept',
+    --     },
+    --   },
+    -- }
   end,
 }

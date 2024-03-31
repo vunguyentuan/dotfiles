@@ -4,7 +4,7 @@
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.opt.cmdheight = 1
+-- vim.opt.cmdheight = 0
 vim.opt.swapfile = false
 
 -- defaults tab
@@ -55,3 +55,9 @@ vim.o.termguicolors = true
 vim.o.shell = '/bin/bash'
 
 vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+
+-- disable default providers
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python_provider = 0
+vim.g.loaded_ruby_provider = 0
