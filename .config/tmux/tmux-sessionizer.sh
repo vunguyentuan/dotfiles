@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(zoxide query -l | rg vunguyen/[^Library] | awk '{ print substr($0,match($0,"/[^/]*$")+1) "\t" $0 }' | fzf --with-nth=1 --bind 'ctrl-x:execute:less {2}' --no-sort | awk -F'\t' '{print $2}')
+    selected=$(zoxide query -l | rg -v "Library|.local|var" | awk '{ print substr($0,match($0,"/[^/]*$")+1) "\t" $0 }' | fzf --with-nth=1 --bind 'ctrl-x:execute:less {2}' --no-sort | awk -F'\t' '{print $2}')
 fi
 
 if [[ -z $selected ]]; then
