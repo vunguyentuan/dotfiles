@@ -1,7 +1,6 @@
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
-eval "$(brew shellenv)"
 
 setopt INC_APPEND_HISTORY        # Add commands to HISTFILE in order of execution
 setopt SHARE_HISTORY             # Share command history data
@@ -28,23 +27,16 @@ alias ls="eza"
 alias docker-up="colima start"
 alias php_decode="php $HOME/Projects/Temp/PHPDeobfuscator/index.php -f"
 
-if [[ $(uname) == "Darwin" ]]; then
-  alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
-  alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power -d"
-  alias config='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-else
-  alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-fi
-
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-
 export PATH="$HOME/.cargo/bin:$PATH"
-
 export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
 
 if [[ $(uname) == "Darwin" ]]; then
+  eval "$(brew shellenv)"
+  alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
+  alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power -d"
   export PATH="$(brew --prefix python)/libexec/bin:$PATH"
   export PATH="/Applications/MAMP/bin/php/php8.2.0/bin:$PATH"
   export PATH="/Applications/MAMP/bin/php:$PATH"
@@ -52,10 +44,6 @@ if [[ $(uname) == "Darwin" ]]; then
   export PNPM_HOME=$HOME/Library/pnpm
   export PATH="$PNPM_HOME:$PATH"
 fi
-
-
-
-export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 
 create_folder_file() {
     if [[ $# -lt 1 ]]; then
