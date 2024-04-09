@@ -33,7 +33,7 @@ return {
     config = function()
       require('copilot').setup {
         panel = {
-          enabled = true,
+          enabled = false,
           auto_refresh = true,
           keymap = {
             jump_prev = '[[',
@@ -48,9 +48,9 @@ return {
           },
         },
         suggestion = {
-          enabled = true,
+          enabled = false,
           auto_trigger = false,
-          debounce = 75,
+          debounce = 3000,
           keymap = {
             accept = '<M-l>',
             accept_word = false,
@@ -87,6 +87,7 @@ return {
     opts = {
       prompts = prompts,
       auto_follow_cursor = false, -- Don't follow the cursor after getting response
+      model = 'gpt-3.5-turbo',
     },
     config = function(_, opts)
       local chat = require 'CopilotChat'

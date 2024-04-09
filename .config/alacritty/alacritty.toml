@@ -152,7 +152,7 @@ key = "J"
 mods = "Control|Shift"
 
 [[keyboard.bindings]]
-chars = "\u0001m"
+chars = "\u0001M"
 key = "K"
 mods = "Command"
 
@@ -264,6 +264,34 @@ chars = "\u00019"
 key = "Key9"
 mods = "Command"
 
+# Tmux Split 
+[[keyboard.bindings]]
+chars = "\u0001v"
+key = "L"
+mods = "Command|Shift"
+
+
+# Tmux project swiching
+[[keyboard.bindings]]
+chars = "\u0001R"
+key = "R"
+mods = "Control|Shift|Alt"
+
+
+[[keyboard.bindings]]
+chars = "\u0001E"
+key = "E"
+mods = "Control|Shift|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001W"
+key = "W"
+mods = "Control|Shift|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001Q"
+key = "Q"
+mods = "Control|Shift|Alt"
 
 [[keyboard.bindings]]
 action = "CreateNewWindow"
