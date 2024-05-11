@@ -52,31 +52,17 @@ function keys.apply_to_config(config)
 		-- },
 		{
 			key = "f",
-			mods = "CTRL",
+			mods = "CMD",
 			action = wezterm.action_callback(function(win, pane)
 				local relativeDir = getRaltiveDir(pane)
+				local new_pane = pane:split({
+					args = {
+						"/opt/homebrew/bin/yazi",
+						relativeDir,
+					},
+				})
 
-				if relativeDir == nil then
-					win:perform_action(
-						act.SpawnCommandInNewTab({
-							args = {
-								"yazi",
-							},
-						}),
-						pane
-					)
-					return
-				end
-
-				win:perform_action(
-					act.SpawnCommandInNewTab({
-						args = {
-							"yazi",
-							relativeDir,
-						},
-					}),
-					pane
-				)
+				win:perform_action(act.TogglePaneZoomState, new_pane)
 			end),
 		},
 		{
@@ -158,12 +144,12 @@ function keys.apply_to_config(config)
 			action = act.CloseCurrentPane({ confirm = true }),
 		},
 		{
-			key = "s",
+			key = "v",
 			mods = "LEADER",
 			action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 		},
 		{
-			key = "v",
+			key = "s",
 			mods = "LEADER",
 			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 		},

@@ -48,7 +48,7 @@ return {
           },
         },
         suggestion = {
-          enabled = false,
+          enabled = true,
           auto_trigger = false,
           debounce = 3000,
           keymap = {
@@ -79,6 +79,7 @@ return {
   {
     'CopilotC-Nvim/CopilotChat.nvim',
     branch = 'canary',
+    enabled = true,
     dependencies = {
       'zbirenbaum/copilot.lua', -- or github/copilot.vim
       { 'ibhagwan/fzf-lua' }, -- Use telescope for help actions
@@ -87,7 +88,7 @@ return {
     opts = {
       prompts = prompts,
       auto_follow_cursor = false, -- Don't follow the cursor after getting response
-      model = 'gpt-3.5-turbo',
+      -- model = 'gpt-3.5-turbo',
     },
     config = function(_, opts)
       local chat = require 'CopilotChat'

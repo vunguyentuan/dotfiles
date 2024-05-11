@@ -14,11 +14,14 @@ set -gx NNN_OPENER "nnn-hx.sh"
 set -Ux FZF_TMUX_OPTS "-p 55%,60%"
 
 # fzf
-set -Ux FZF_DEFAULT_COMMAND "fd --type file --hidden --no-ignore"
+set -Ux FZF_DEFAULT_COMMAND "fd --type file --hidden --no-ignore --exclude .git --exclude node_modules"
 
+
+
+set -Ux AWS_PROFILE "ctsg"
 
 # alias
-alias nvm="fnm"
+alias nvm="volta"
 alias vim="nvim"
 alias v="nvim"
 alias d="npm run dev"
@@ -31,8 +34,9 @@ alias docker-up="colima start"
 alias php_decode="php $HOME/Projects/Temp/PHPDeobfuscator/index.php -f"
 
 if test (uname) = Darwin
-  alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
-  alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power -d"
+  alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power"
+  alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power -d -dbp 10003"
+  alias cdbstg="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e stg -a power -d -dbp 10004"
   alias config='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 else
   alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -42,7 +46,7 @@ end
 set -Ux BUN_INSTALL "$HOME/.bun"
 fish_add_path "$HOME/.bun/bin"
 fish_add_path "$HOME/.local/bin"
-
+fish_add_path "$HOME/go/bin"
 # rust
 fish_add_path "$HOME/.cargo/bin"
 
@@ -109,3 +113,5 @@ function create_folder_file
         touch -- $file_path_info
     end
 end
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH

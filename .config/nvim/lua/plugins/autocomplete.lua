@@ -49,6 +49,14 @@ return {
 
       local lspkind = require 'lspkind'
 
+      -- lspkind.init {
+      --   symbol_map = {
+      --     Copilot = '?',
+      --   },
+      -- }
+
+      vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
+
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -85,10 +93,15 @@ return {
           completeopt = 'menu,menuone,noinsert',
         },
         formatting = {
+          fields = {
+            cmp.ItemField.Menu,
+            cmp.ItemField.Abbr,
+            cmp.ItemField.Kind,
+          },
           format = lspkind.cmp_format {
-            mode = 'symbol',
-            max_width = 50,
-            symbol_map = { Copilot = '?' },
+            -- mode = 'symbol_text',
+            preset = 'codicons',
+            before = require('tailwind-tools.cmp').lspkind_format,
           },
         },
         snippet = {
@@ -125,7 +138,24 @@ return {
             hl_group = 'CmpGhostText',
           },
         },
-        sorting = defaults.sorting,
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            require('copilot_cmp.comparators').prioritize,
+
+            -- Below is the default comparitor list and order for nvim-cmp
+            cmp.config.compare.offset,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
       }
     end,
   },

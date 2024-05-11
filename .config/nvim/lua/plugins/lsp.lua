@@ -102,7 +102,17 @@ return {
       -- tsserver = {},
 
       emmet_language_server = {},
-      tailwindcss = {},
+      tailwindcss = {
+        tailwindCSS = {
+          experimental = {
+            classRegex = {
+              { 'tv\\((([^()]*|\\([^()]*\\))*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
+              { 'cva\\(([^)]*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
+              { 'cx\\(([^)]*)\\)', "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+            },
+          },
+        },
+      },
       cssls = {},
       cssmodules_ls = {},
       vtsls = {
