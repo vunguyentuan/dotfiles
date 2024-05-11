@@ -3,3 +3,4 @@ tmux/plugins
 helix/runtimes
 .log
 .DS_Store
+.config/github-copilot/hosts.json
