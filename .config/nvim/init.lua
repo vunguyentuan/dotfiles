@@ -32,7 +32,7 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   { import = 'plugins' },
-  { import = 'plugins/chatgpt' },
+  -- { import = 'plugins/chatgpt' },
 }, {
   defaults = {
     lazy = false,

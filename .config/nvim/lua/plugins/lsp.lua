@@ -172,17 +172,5 @@ return {
       end,
     }
 
-    -- require('lspconfig').harper_ls.setup {}
-
-    -- typescript-tools
-    -- require('typescript-tools').setup {
-    --   settings = {
-    --     tsserver_file_preferences = {
-    --       includeInlayParameterNameHints = 'all',
-    --       includeCompletionsForModuleExports = true,
-    --       quotePreference = 'auto',
-    --     },
-    --   },
-    -- }
-  end,
+ end,
 }

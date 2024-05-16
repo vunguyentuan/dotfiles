@@ -4,3 +4,6 @@ helix/runtimes
 .log
 .DS_Store
 .config/github-copilot/hosts.json
+.config/configstore
+.config/zed/embeddings/
+.tmp*

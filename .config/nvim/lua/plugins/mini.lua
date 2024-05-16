@@ -45,7 +45,7 @@ return {
         synchronize = '<cr>',
       },
       windows = {
-        preview = true,
+        preview = false,
         width_preview = 80,
       },
     }

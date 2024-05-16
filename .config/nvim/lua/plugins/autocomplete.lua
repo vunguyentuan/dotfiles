@@ -100,7 +100,7 @@ return {
           },
           format = lspkind.cmp_format {
             -- mode = 'symbol_text',
-            preset = 'codicons',
+            -- preset = 'codicons',
             before = require('tailwind-tools.cmp').lspkind_format,
           },
         },

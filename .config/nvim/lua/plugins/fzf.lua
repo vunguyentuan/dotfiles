@@ -8,7 +8,7 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   cmd = 'FzfLua',
   keys = {
-    { '<leader><space>', '<cmd>FzfLua buffers<cr>', desc = 'Switch Buffer' },
+    -- { '<leader><space>', '<cmd>GrugFar<CR>', desc = 'Find and replace' },
     { '<leader>f', '<cmd>FzfLua files<cr>', desc = 'File files' },
     { '<leader>ss', '<cmd>FzfLua live_grep<cr>', desc = 'Live grep' },
     { '<leader>gg', '<cmd>FzfLua git_status<cr>', desc = 'Git status' },
