@@ -24,6 +24,8 @@ local keys = {}
 local function getRaltiveDir(pane)
 	local current_pane = wezterm.mux.get_pane(pane:pane_id())
 	local input = current_pane:get_lines_as_text()
+	local working_dir = current_pane:get_current_working_dir()
+	print(working_dir)
 
 	-- Split the input by newline characters
 	local lines = {}
@@ -70,30 +72,10 @@ function keys.apply_to_config(config)
 			mods = "CMD",
 
 			action = wezterm.action_callback(function(win, pane)
-				local relativeDir = getRaltiveDir(pane)
-
-				if relativeDir == nil then
-					win:perform_action(
-						act.SpawnCommandInNewTab({
-							args = {
-								"/opt/homebrew/bin/lazygit",
-							},
-							position = {
-								x = 0,
-								y = 0,
-							},
-						}),
-						pane
-					)
-
-					return
-				end
-
 				win:perform_action(
 					act.SpawnCommandInNewTab({
 						args = {
 							"/opt/homebrew/bin/lazygit",
-							relativeDir,
 						},
 						position = {
 							x = 0,
@@ -104,12 +86,12 @@ function keys.apply_to_config(config)
 				)
 			end),
 		},
-		{
-			key = "s",
-			mods = "CMD",
-			action = wezterm.action.SendString("\x1b:w\r\n"),
-			-- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
-		},
+		-- {
+		-- 	key = "s",
+		-- 	mods = "CMD",
+		-- 	action = wezterm.action.SendString("\x1b:w\r\n"),
+		-- 	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
+		-- },
 		{
 			key = "l",
 			mods = "CMD",
@@ -226,56 +208,6 @@ function keys.apply_to_config(config)
 			action = act.RotatePanes("CounterClockwise"),
 		},
 		{
-			key = "h",
-			mods = "ALT",
-			action = act.ActivatePaneDirection("Left"),
-		},
-		{
-			key = "l",
-			mods = "ALT",
-			action = act.ActivatePaneDirection("Right"),
-		},
-		{
-			key = "k",
-			mods = "ALT",
-			action = act.ActivatePaneDirection("Up"),
-		},
-		{
-			key = "j",
-			mods = "ALT",
-			action = act.ActivatePaneDirection("Down"),
-		},
-		{
-			key = "LeftArrow",
-			mods = "ALT",
-			action = act.AdjustPaneSize({ "Left", 1 }),
-		},
-		{
-			key = "RightArrow",
-			mods = "ALT",
-			action = act.AdjustPaneSize({ "Right", 1 }),
-		},
-		{
-			key = "UpArrow",
-			mods = "ALT",
-			action = act.AdjustPaneSize({ "Up", 1 }),
-		},
-		{
-			key = "DownArrow",
-			mods = "ALT",
-			action = act.AdjustPaneSize({ "Down", 1 }),
-		},
-		{
-			key = "UpArrow",
-			mods = "ALT|CMD",
-			action = act.SwitchWorkspaceRelative(1),
-		},
-		{
-			key = "DownArrow",
-			mods = "ALT|CMD",
-			action = act.SwitchWorkspaceRelative(-1),
-		},
-		{
 			key = "j",
 			mods = "CMD",
 			action = wezterm.action_callback(workspaces.fuzzy_picker),
@@ -298,13 +230,49 @@ function keys.apply_to_config(config)
 		},
 	}
 
-	for i = 1, 9 do
-		table.insert(config.keys, {
-			key = tostring(i),
-			mods = "LEADER",
-			action = act.ActivateTab(i - 1),
-		})
+	local function createKeyBinding(key, cwd)
+		local workspaceName = "Govtech 󰳠  " .. cwd:match(".*/(.*)")
+		local absolutePath = wezterm.home_dir .. "/" .. cwd
+		return {
+			key = key,
+			mods = "ALT|SHIFT|CTRL",
+			action = act.SwitchToWorkspace({
+				name = workspaceName,
+				spawn = {
+					cwd = absolutePath,
+				},
+			}),
+		}
 	end
+
+	local keyPathPairs = {
+		r = "Projects/Govtech/crowdtaskgovbackend",
+		e = "Projects/Govtech/pulseagencyportal",
+		w = "Projects/Govtech/crowdtaskgovportal",
+		q = "Projects/Govtech/crowdtasksgbackend",
+	}
+
+	for key, path in pairs(keyPathPairs) do
+		table.insert(config.keys, createKeyBinding(key, path))
+	end
+
+	local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+
+	-- you can put the rest of your Wezterm config here
+	smart_splits.apply_to_config(config, {
+		-- the default config is here, if you'd like to use the default keys,
+		-- you can omit this configuration table parameter and just use
+		-- smart_splits.apply_to_config(config)
+
+		-- directional keys to use in order of: left, down, up, right
+		direction_keys = { "h", "j", "k", "l" },
+
+		-- modifier keys to combine with direction_keys
+		modifiers = {
+			move = "CTRL", -- modifier to use for pane movement, e.g. CTRL+h to move left
+			resize = "CMD|CTRL", -- modifier to use for pane resize, e.g. META+h to resize to the left
+		},
+	})
 
 	config.mouse_bindings = {
 		{

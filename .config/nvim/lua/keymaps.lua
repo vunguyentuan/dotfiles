@@ -10,6 +10,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- save file with Ctrl + S
+vim.keymap.set({ 'n', 'i', 'v' }, '<D-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
 -- vim.keymap.set({ 'n', 'i', 'v' }, '<C-c>', 'gcc', { noremap = true, silent = true, desc = 'Toggle comments' })
