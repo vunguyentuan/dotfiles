@@ -32,14 +32,9 @@ config.freetype_load_flags = "NO_HINTING"
 config.enable_kitty_keyboard = true
 config.use_dead_keys = false
 
--- This doens't seem to work? If it is fixed, it would be good to include
--- Currently: PATH = /usr/bin:/bin:/usr/sbin:/sbin when running from wezterm
--- config.set_environment_variables = {
---   PATH = '/Users/daniel/.config/scripts:' .. '/opt/homebrew/bin:' .. os.getenv('PATH')
--- }
-
--- This might not be a good idea?
--- config.default_prog = { '/opt/homebrew/bin/zsh', '-l' }
+config.set_environment_variables = {
+  PATH =  wezterm.home_dir.. '/.volta/bin:' .. wezterm.home_dir .. '/.config/scripts:' .. '/opt/homebrew/bin:' .. os.getenv('PATH')
+}
 
 require("gui").apply_to_config(config)
 
@@ -51,11 +46,11 @@ wezterm.on("format-tab-title", tab_bar.on_format_tab_title)
 
 tab_bar.apply_to_config(config)
 
-local toggles = require("toggles")
+-- local toggles = require("toggles")
 
-wezterm.on("toggle-bg", toggles.on_toggle_bg)
+-- wezterm.on("toggle-bg", toggles.on_toggle_bg)
 
-wezterm.on("toggle-ligature", toggles.on_toggle_ligature)
+-- wezterm.on("toggle-ligature", toggles.on_toggle_ligature)
 
 local zen_mode = require("zen-mode")
 

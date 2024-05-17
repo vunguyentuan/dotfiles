@@ -21,11 +21,9 @@ end)
 
 local keys = {}
 
-local function getRaltiveDir(pane)
+local function getRelativeDir(pane)
 	local current_pane = wezterm.mux.get_pane(pane:pane_id())
 	local input = current_pane:get_lines_as_text()
-	local working_dir = current_pane:get_current_working_dir()
-	print(working_dir)
 
 	-- Split the input by newline characters
 	local lines = {}
@@ -46,20 +44,14 @@ function keys.apply_to_config(config)
 	config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 3000 }
 
 	config.keys = {
-		-- Turn off the default CTRL-SHIFT-Space action (so it can potentially be used in tmux)
-		-- {
-		--     key = 'Space',
-		--     mods = 'CTRL|SHIFT',
-		--     action = act.DisableDefaultAssignment,
-		-- },
 		{
 			key = "f",
 			mods = "CMD",
 			action = wezterm.action_callback(function(win, pane)
-				local relativeDir = getRaltiveDir(pane)
+				local relativeDir = getRelativeDir(pane)
 				local new_pane = pane:split({
 					args = {
-						"/opt/homebrew/bin/yazi",
+						"yazi",
 						relativeDir,
 					},
 				})
@@ -72,26 +64,15 @@ function keys.apply_to_config(config)
 			mods = "CMD",
 
 			action = wezterm.action_callback(function(win, pane)
-				win:perform_action(
-					act.SpawnCommandInNewTab({
-						args = {
-							"/opt/homebrew/bin/lazygit",
-						},
-						position = {
-							x = 0,
-							y = 0,
-						},
-					}),
-					pane
-				)
+				local new_pane = pane:split({
+					args = {
+						"lazygit",
+					},
+				})
+
+				win:perform_action(act.TogglePaneZoomState, new_pane)
 			end),
 		},
-		-- {
-		-- 	key = "s",
-		-- 	mods = "CMD",
-		-- 	action = wezterm.action.SendString("\x1b:w\r\n"),
-		-- 	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
-		-- },
 		{
 			key = "l",
 			mods = "CMD",

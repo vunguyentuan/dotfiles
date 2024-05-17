@@ -94,6 +94,8 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 export EDITOR="nvim" # or "vim", or "code", etc.
+export AWS_PROFILE="ctsg"
+
 export GPG_TTY=$(tty)
 export NNN_OPENER="nnn-hx.sh"
 export FZF_TMUX_OPTS="-p 55%,60%"
