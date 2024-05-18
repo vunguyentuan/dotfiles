@@ -1,0 +1,7 @@
+[user]
+    name = Vu Nguyen
+    email = vu.nguyen2@cognizant.com
+	  signingkey = E71B40205BF6D50E
+
+[commit]
+gpgsign = true
