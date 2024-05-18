@@ -108,13 +108,13 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
 
-if [[ $(uname) == "Darwin" ]]; then
-  alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power"
-  alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power -d -dbp 10003"
-  alias cdbstg="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e stg -a power -d -dbp 10004"
-  alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
-  alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power -d"
+alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power"
+alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power -d -dbp 10003"
+alias cdbstg="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e stg -a power -d -dbp 10004"
+alias gaws="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
+alias cdbdev="~/projects/govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power -d"
 
+if [[ $(uname) == "Darwin" ]]; then
   export PATH="$(brew --prefix python)/libexec/bin:$PATH"
   export PATH="$HOME/Library/Python/3.11/bin:$PATH"
   export PNPM_HOME=$HOME/Library/pnpm
