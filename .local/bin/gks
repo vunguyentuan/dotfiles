@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+export AWS_PROFILE=ctsg
+
+# Run aws sts get-caller-identity command and capture its exit code
+aws sts get-caller-identity >/dev/null 2>&1
+
+if [ $? -ne 0 ]; then
+    # If the exit code is non-zero, there was an error
+    echo "Error encountered. Logging in with AWS SSO."
+    aws sso login --sso-session gaws
+fi
+
+selected=$(aws eks list-clusters | jq -r ".clusters[]" | fzf)
+
+if [[ -z $selected ]]; then
+	exit 0
+fi
+
+aws eks --region ap-southeast-1 update-kubeconfig --name $selected
+k9s
