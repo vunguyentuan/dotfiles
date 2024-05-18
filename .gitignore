@@ -7,3 +7,4 @@ helix/runtimes
 .config/configstore
 .config/zed/embeddings/
 .tmp*
+.config/lazygit/state.yml
