@@ -7,21 +7,21 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.unix_domains = {
-	{
-		name = "unix",
-	},
-}
+-- config.unix_domains = {
+-- 	{
+-- 		name = "unix",
+-- 	},
+-- }
 
 config.ssh_domains = {
 	{
 		-- This name identifies the domain
-		name = "my.server",
+		name = "arch",
 		-- The hostname or address to connect to. Will be used to match settings
 		-- from your ssh config file
-		remote_address = "192.168.1.1",
+		remote_address = "192.168.102.26",
 		-- The username to use on the remote host
-		username = "wez",
+		username = "vunguyen",
 	},
 }
 
