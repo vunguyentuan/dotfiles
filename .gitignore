@@ -9,3 +9,6 @@ helix/runtimes
 .tmp*
 .config/lazygit/state.yml
 .config/raycast/extensions/
+.config/dotenvx
+.config/k9s
+.config/nextjs-nodejs
