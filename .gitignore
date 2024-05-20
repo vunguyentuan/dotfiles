@@ -8,3 +8,4 @@ helix/runtimes
 .config/zed/embeddings/
 .tmp*
 .config/lazygit/state.yml
+.config/raycast/extensions/
