@@ -16,6 +16,9 @@ vim.bo.softtabstop = 2
 -- Set highlight on search
 vim.o.hlsearch = false
 
+-- enable relative line numbers
+vim.wo.relativenumber = true
+
 -- Make line numbers default
 vim.wo.number = true
 
