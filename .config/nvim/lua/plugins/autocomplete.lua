@@ -1,7 +1,8 @@
 return {
   {
     'L3MON4D3/LuaSnip',
-    build = (not jit.os:find 'Windows') and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp" or nil,
+    build = (not jit.os:find 'Windows') and
+        "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp" or nil,
     -- enabled = false,
     dependencies = {
       'rafamadriz/friendly-snippets',
@@ -41,11 +42,11 @@ return {
       'saadparwaiz1/cmp_luasnip',
       'onsails/lspkind.nvim',
     },
-    opts = function()
+    config = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
-      local defaults = require 'cmp.config.default'()
+      local defaults = require 'cmp.config.default' ()
 
       local lspkind = require 'lspkind'
 
@@ -87,12 +88,13 @@ return {
           fallback()
         end
       end
-      --
-      return {
+
+      cmp.setup {
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
         formatting = {
+          expandable_indicator = true,
           fields = {
             cmp.ItemField.Menu,
             cmp.ItemField.Abbr,
@@ -157,6 +159,14 @@ return {
           },
         },
       }
+
+      -- Setup up vim-dadbod
+      cmp.setup.filetype({ "sql" }, {
+        sources = {
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
+        },
+      })
     end,
   },
 }
