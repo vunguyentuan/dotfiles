@@ -89,6 +89,11 @@ alias ls="eza"
 alias docker-up="colima start"
 alias php_decode="php $HOME/Projects/Temp/PHPDeobfuscator/index.php -f"
 
+# Locale
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
