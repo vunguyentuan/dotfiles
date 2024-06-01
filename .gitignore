@@ -12,3 +12,4 @@ helix/runtimes
 .config/dotenvx
 .config/k9s
 .config/nextjs-nodejs
+.config/tmux/plugins

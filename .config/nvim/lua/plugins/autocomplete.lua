@@ -88,6 +88,8 @@ return {
           fallback()
         end
       end
+      vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#6CC644" })
+
 
       cmp.setup {
         completion = {
@@ -103,6 +105,8 @@ return {
           format = lspkind.cmp_format {
             -- mode = 'symbol_text',
             -- preset = 'codicons',
+            symbol_map = { Supermaven = "" },
+
             before = require('tailwind-tools.cmp').lspkind_format,
           },
         },
@@ -129,7 +133,9 @@ return {
           }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
         sources = cmp.config.sources {
-          { name = 'copilot' },
+          -- { name = 'copilot' },
+          { name = "supermaven" },
+
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'buffer' },

@@ -108,11 +108,16 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
 
-alias gaws="~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power"
-alias cdbdev="~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power -d -dbp 10003"
-alias cdbstg="~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e stg -a power -d -dbp 10004"
-alias gaws="~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power"
-alias cdbdev="~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu_nguyen -e dev -a power -d"
+function gaws () {
+  ~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power
+}
+
+function cdbdev(){
+  ~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e dev -a power -d -dbp 10003
+}
+function cdbstg(){
+  ~/Projects/Govtech/ctsg-infra-ops/ops/ctsg_remote_access.sh -u vu.nguyen2 -e stg -a power -d -dbp 10004
+}
 
 if [[ $(uname) == "Darwin" ]]; then
   export PATH="$(brew --prefix python)/libexec/bin:$PATH"

@@ -10,7 +10,7 @@ return {
 
     -- Useful status updates for LSP
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+    { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
@@ -107,8 +107,8 @@ return {
           experimental = {
             classRegex = {
               { 'tv\\((([^()]*|\\([^()]*\\))*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
-              { 'cva\\(([^)]*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
-              { 'cx\\(([^)]*)\\)', "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+              { 'cva\\(([^)]*)\\)',                 '["\'`]([^"\'`]*).*?["\'`]' },
+              { 'cx\\(([^)]*)\\)',                  "(?:'|\"|`)([^']*)(?:'|\"|`)" },
             },
           },
         },
@@ -116,6 +116,7 @@ return {
       cssls = {},
       cssmodules_ls = {},
       vtsls = {
+        enableMoveToFileCodeAction = true,
         format = { enable = false },
       },
 
@@ -171,6 +172,5 @@ return {
         }
       end,
     }
-
- end,
+  end,
 }
