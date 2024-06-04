@@ -1,7 +1,6 @@
 return {
   -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  -- enabled = false,
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
@@ -9,32 +8,14 @@ return {
     'williamboman/mason-lspconfig.nvim',
 
     -- Useful status updates for LSP
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
-    'folke/neodev.nvim',
+    'folke/lazydev.nvim',
     'folke/trouble.nvim',
-    -- 'yioneko/nvim-vtsls',
-    -- 'nvimdev/lspsaga.nvim',
-    -- 'pmizio/typescript-tools.nvim',
   },
   config = function()
     local on_attach = function(client, bufnr)
-      -- disable_formatting for typescript
-      -- if client.name == 'tsserver' or client.name == 'vtsls' then
-      --   client.resolved_capabilities.document_formatting = false
-      --   client.resolved_capabilities.document_range_formatting = false
-      -- end
-
-      -- run eslint fix on save
-      -- if client.name == 'eslint' then
-      --   vim.api.nvim_create_autocmd('BufWritePre', {
-      --     buffer = bufnr,
-      --     command = 'EslintFixAll',
-      --   })
-      -- end
-
       if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
         vim.api.nvim_clear_autocmds { buffer = bufnr, group = 'lsp_document_highlight' }
@@ -87,11 +68,6 @@ return {
       vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
       vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
       vim.keymap.set('n', '<leader>ww', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
-      -- Create a command `:Format` local to the LSP buffer
-      -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-      --   vim.lsp.buf.format()
-      -- end, { desc = 'Format current buffer with LSP' })
     end
 
     local servers = {
@@ -149,7 +125,7 @@ return {
     }
 
     -- Setup neovim lua configuration
-    require('neodev').setup()
+    require('lazydev').setup()
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
     local capabilities = vim.lsp.protocol.make_client_capabilities()
