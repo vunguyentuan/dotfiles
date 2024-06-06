@@ -16,8 +16,17 @@ return {
   config = function()
     require('fzf-lua').setup {
       files = {
-        git_icons = false,
-        file_icons = false,
+        prompt = ' ❯ ',
+        git_icons = true,
+        file_icons = true,
+
+        cwd_prompt = false,
+        -- formatter = 'path.filename_first',
+      },
+      winopts = {
+        preview = {
+          hidden = 'hidden',
+        },
       },
 
       keymap = {
