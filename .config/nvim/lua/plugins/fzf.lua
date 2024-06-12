@@ -15,6 +15,9 @@ return {
   },
   config = function()
     require('fzf-lua').setup {
+      grep = {
+        multiline = 2,
+      },
       files = {
         prompt = ' ❯ ',
         git_icons = true,

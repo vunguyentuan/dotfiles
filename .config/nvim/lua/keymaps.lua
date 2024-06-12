@@ -13,12 +13,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set({ 'n', 'i', 'v' }, '<D-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
--- vim.keymap.set({ 'n', 'i', 'v' }, '<C-c>', 'gcc', { noremap = true, silent = true, desc = 'Toggle comments' })
-
--- move line
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
-
 vim.keymap.set('n', 'J', 'mzJ`z')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
