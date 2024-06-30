@@ -1,0 +1,9 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-j": "editor::SelectLargerSyntaxNode",
+      "alt-k": "editor::SelectSmallerSyntaxNode"
+    }
+  }
+]

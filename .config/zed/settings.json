@@ -17,8 +17,5 @@
     "font_family": "FiraCode Nerd Font",
     "blinking": "off"
   },
-  "assistant": {
-    "dock": "right"
-  },
   "vim_mode": true
 }

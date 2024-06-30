@@ -142,6 +142,11 @@ key = "T"
 mods = "Command"
 
 [[keyboard.bindings]]
+chars = "\u0001P"
+key = "n"
+mods = "Command"
+
+[[keyboard.bindings]]
 chars = "\u0001v"
 key = "L"
 mods = "Control|Shift"

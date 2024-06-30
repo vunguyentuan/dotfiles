@@ -13,3 +13,4 @@ helix/runtimes
 .config/k9s
 .config/nextjs-nodejs
 .config/tmux/plugins
+.config/zed/prompts/prompts-library-db.0.mdb
