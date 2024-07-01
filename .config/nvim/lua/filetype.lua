@@ -8,6 +8,7 @@ vim.filetype.add {
   filename = {
     ['.env'] = 'bash',
     ['tsconfig.json'] = 'jsonc',
+    ['.swcrc'] = 'jsonc',
     ['.yamlfmt'] = 'yaml',
   },
   pattern = {

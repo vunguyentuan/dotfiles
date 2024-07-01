@@ -4,11 +4,10 @@ theme = "vu"
 true-color = true
 color-modes = true
 idle-timeout = 75
-shell = ["fish", "-c"]
 
 [editor.file-picker]
 hidden = false
-git-ignore = false
+git-ignore = true
 
 [editor.indent-guides]
 render = true

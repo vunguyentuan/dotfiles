@@ -13,8 +13,16 @@ return {
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/lazydev.nvim',
     'folke/trouble.nvim',
+    'dmmulroy/ts-error-translator.nvim'
   },
   config = function()
+    require("ts-error-translator").setup()
+
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+      require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
+      vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+    end
+
     local on_attach = function(client, bufnr)
       if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
@@ -75,7 +83,12 @@ return {
       -- gopls = {},
       -- pyright = {},
       -- rust_analyzer = {},
-      -- tsserver = {},
+      jsonls = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+          validate = { enable = true },
+        },
+      },
 
       emmet_language_server = {},
       tailwindcss = {
@@ -92,8 +105,24 @@ return {
       cssls = {},
       cssmodules_ls = {},
       vtsls = {
-        enableMoveToFileCodeAction = true,
+        enableMoveToFileCodeAction = false,
         format = { enable = false },
+
+        typescript = {
+          preferGoToSourceDefinition = true,
+          importModuleSpecifierPreference = "non-relative",
+          preferences = {
+            preferGoToSourceDefinition = true,
+            importModuleSpecifierPreference = "non-relative",
+          },
+        },
+
+        experimental = {
+          completion = {
+            enableServerSideFuzzyMatch = true,
+            entriesLimit = 20
+          }
+        }
       },
 
       -- harper_ls = {},
