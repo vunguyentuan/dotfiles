@@ -10,7 +10,7 @@ end
 function workspace.quick_picker(window, pane)
     -- wezterm.home_dir = '/Users/daniel'
     local success, stdout, stderr = wezterm.run_child_process {
-        wezterm.home_dir .. '/.config/scripts/wezterm-workspaces.sh'
+        'wezterm-workspaces.sh'
     }
     -- -- set_environment_variables somewhere here? to avoid writing full brew path in the script
     -- set_environment_variables = {

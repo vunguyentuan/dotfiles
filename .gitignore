@@ -14,3 +14,4 @@ helix/runtimes
 .config/nextjs-nodejs
 .config/tmux/plugins
 .config/zed/prompts/prompts-library-db.0.mdb
+.config/fish/completions

@@ -19,7 +19,7 @@ config.ssh_domains = {
 		name = "arch",
 		-- The hostname or address to connect to. Will be used to match settings
 		-- from your ssh config file
-		remote_address = "192.168.102.26",
+		remote_address = "192.168.1.8",
 		-- The username to use on the remote host
 		username = "vunguyen",
 	},

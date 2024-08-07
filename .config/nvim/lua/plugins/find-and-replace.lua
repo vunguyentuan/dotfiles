@@ -7,6 +7,7 @@ return {
       desc = 'Find and Replace',
     },
   },
+  cmd = { "GrugFar" },
   config = function()
     require('grug-far').setup {}
   end,

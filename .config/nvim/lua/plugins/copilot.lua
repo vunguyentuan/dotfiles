@@ -21,7 +21,7 @@ return {
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
-    event = 'InsertEnter',
+    event = 'VeryLazy',
     dependencies = {
       {
         'zbirenbaum/copilot-cmp',
@@ -133,7 +133,6 @@ return {
         chat.ask(args.args, { selection = select.buffer })
       end, { nargs = '*', range = true })
     end,
-    event = 'VeryLazy',
     keys = {
       {
         '<leader>cch',

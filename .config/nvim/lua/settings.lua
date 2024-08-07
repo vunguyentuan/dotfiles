@@ -13,6 +13,8 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
 
+-- vim.opt.rocks.hererocks = true
+
 -- Set highlight on search
 vim.o.hlsearch = false
 

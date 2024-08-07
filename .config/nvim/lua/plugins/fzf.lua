@@ -1,9 +1,6 @@
--- Fuzzy Finder Algorithm which requires local dependencies to be built.
--- Only load if `make` is available. Make sure you have the system
--- requirements installed.
-
 return {
   'ibhagwan/fzf-lua',
+  enabled = false,
   -- optional for icon support
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   cmd = 'FzfLua',
@@ -15,15 +12,15 @@ return {
   },
   config = function()
     require('fzf-lua').setup {
-      grep = {
-        multiline = 2,
-      },
+      -- grep = {
+      --   -- multiline = 2,
+      -- },
       files = {
         prompt = ' ❯ ',
         git_icons = true,
         file_icons = true,
 
-        cwd_prompt = false,
+        -- cwd_prompt = false,
         -- formatter = 'path.filename_first',
       },
       winopts = {
@@ -39,18 +36,5 @@ return {
       },
     }
 
-    -- calling `setup` is optional for customization
-    -- require('fzf-lua').setup {
-    --   -- 'telescope',
-    --   -- 'max-perf',
-    --   -- 'fzf-native',
-    --   -- 'default',
-    --   -- fullscreen = true,
-    --   keymap = {
-    --     fzf = {
-    --       ['ctrl-q'] = 'select-all+accept',
-    --     },
-    --   },
-    -- }
   end,
 }

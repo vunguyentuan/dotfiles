@@ -167,7 +167,7 @@
                         "product_id": 6519,
                         "vendor_id": 12951
                     },
-                    "ignore": true,
+                    "ignore": false,
                     "manipulate_caps_lock_led": true,
                     "mouse_flip_horizontal_wheel": false,
                     "mouse_flip_vertical_wheel": false,

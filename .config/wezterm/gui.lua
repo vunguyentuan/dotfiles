@@ -23,8 +23,8 @@ function gui.apply_to_config(config)
 	config.line_height = 1.2
 
 	config.inactive_pane_hsb = {
-		saturation = 0.8,
-		brightness = 0.8,
+		saturation = 0.1,
+		brightness = 0.5,
 	}
 
 	-- config.background = {

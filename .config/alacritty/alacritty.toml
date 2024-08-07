@@ -168,14 +168,14 @@ mods = "Command"
 
 [[keyboard.bindings]]
 chars = """
-:FzfLua commands
+:Telescope commands
 """
 key = "P"
 mods = "Command|Shift"
 
 [[keyboard.bindings]]
 chars = """
-:FzfLua files
+:Telescope find_files
 """
 key = "P"
 mods = "Command"

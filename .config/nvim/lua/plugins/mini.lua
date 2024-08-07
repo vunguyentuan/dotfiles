@@ -1,40 +1,28 @@
 local utils = require 'utils'
 return {
   'echasnovski/mini.nvim',
-  version = false,
   event = 'VeryLazy',
-  dependencies = {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-  },
   config = function()
-    require('mini.basics').setup {
-      options = {
-        extra_ui = false,
-      },
-      mappings = {
-        windows = false,
-      },
-    }
-
-    require('mini.statusline').setup {
-      user_icons = true,
-    }
-
+    require('mini.basics').setup()
+    require('mini.statusline').setup()
     require('mini.move').setup()
-    require('mini.indentscope').setup {
-      draw = {
-        animation = function(s, n)
-          return 5
-        end,
-      },
-      symbol = '│',
-    }
+    require('mini.indentscope').setup()
+    require('mini.ai').setup()
 
-    require('mini.sessions').setup {
-      autowrite = true,
-    }
+    local win_config = function()
+      local height = math.floor(0.618 * vim.o.lines)
+      local width = math.floor(0.618 * vim.o.columns)
+      return {
+        anchor = 'NW',
+        height = height,
+        width = width,
+        row = math.floor(0.5 * (vim.o.lines - height)),
+        col = math.floor(0.5 * (vim.o.columns - width)),
+      }
+    end
 
     local minifiles = require 'mini.files'
+
     minifiles.setup {
       mappings = {
         go_in = 'L',
@@ -82,7 +70,8 @@ return {
       pattern = 'MiniFilesActionMove',
       callback = function(args)
         for _, client in pairs(vim.lsp.get_active_clients()) do
-          local will_rename = utils.get_nested_path(client, { 'server_capabilities', 'workspace', 'fileOperations', 'willRename' })
+          local will_rename = utils.get_nested_path(client,
+            { 'server_capabilities', 'workspace', 'fileOperations', 'willRename' })
           -- print(vim.inspect(will_rename))
           if will_rename ~= nil then
             local filters = will_rename.filters or {}
@@ -96,22 +85,6 @@ return {
         end
       end,
     })
-
-    require('mini.surround').setup {
-      -- Module mappings. Use `''` (empty string) to disable one.
-      mappings = {
-        add = '<leader>sa', -- Add surrounding in Normal and Visual modes
-        delete = '<leader>sd', -- Delete surrounding
-        find = '<leader>sf', -- Find surrounding (to the right)
-        find_left = '<leader>sF', -- Find surrounding (to the left)
-        highlight = '<leader>sh', -- Highlight surrounding
-        replace = '<leader>sr', -- Replace surrounding
-        update_n_lines = '<leader>sn', -- Update `n_lines`
-
-        suffix_last = 'l', -- Suffix to search with "prev" method
-        suffix_next = 'n', -- Suffix to search with "next" method
-      },
-    }
 
     local miniclue = require 'mini.clue'
     miniclue.setup {
@@ -175,36 +148,6 @@ return {
         -- Keys to scroll inside the clue window
         scroll_down = '<C-d>',
         scroll_up = '<C-u>',
-      },
-    }
-
-    -- require('mini.completion').setup()
-
-    -- text object
-    require('mini.ai').setup()
-
-    require('ts_context_commentstring').setup {
-      enable_autocmd = false,
-    }
-
-    require('mini.comment').setup {
-      options = {
-        custom_commentstring = function()
-          return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
-        end,
-        ignore_blank_line = true,
-      },
-      mappings = {
-        -- Toggle comment (like `gcip` - comment inner paragraph) for both
-        -- Normal and Visual modes
-        comment = 'gc',
-
-        -- Toggle comment on current line
-        comment_line = '<C-c>',
-        comment_visual = '<C-c>',
-
-        -- Define 'comment' textobject (like `dgc` - delete whole comment block)
-        textobject = 'gc',
       },
     }
   end,

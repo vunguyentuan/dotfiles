@@ -1,9 +1,7 @@
 return {
-  -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = "VeryLazy",
   dependencies = {
-    -- Automatically install LSPs to stdpath for neovim
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
 
@@ -51,19 +49,11 @@ return {
 
       nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
-      -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-      vim.keymap.set({ 'n', 'v' }, '<leader>a', '<cmd>FzfLua lsp_code_actions<CR>')
+      nmap('<leader>a', vim.lsp.buf.code_action, '[C]ode [A]ction')
+      -- vim.keymap.set({ 'n', 'v' }, '<leader>a', '<cmd>lua vim.lsp.buf.code_action<CR>')
 
-      nmap('gd', function()
-        require('fzf-lua').lsp_definitions {
-          sync = true,
-          jump_to_single_result = true,
-        }
-      end, '[G]oto [D]efinition')
-
-      nmap('gr', function()
-        require('fzf-lua').lsp_references { ignore_current_line = true, includeDeclaration = false }
-      end, '[G]oto [R]eferences')
+      nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+      nmap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
       nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
       nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 

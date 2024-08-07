@@ -12,7 +12,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- save file with Ctrl + S
 vim.keymap.set({ 'n', 'i', 'v' }, '<D-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
-vim.keymap.set({ 'n', 'v' }, '<C-m>', '<cmd>MCstart<cr>', { desc = 'Find current word' })
 
 vim.keymap.set('n', 'J', 'mzJ`z')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')

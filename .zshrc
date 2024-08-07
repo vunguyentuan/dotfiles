@@ -106,6 +106,7 @@ export NNN_OPENER="nnn-hx.sh"
 export FZF_TMUX_OPTS="-p 55%,60%"
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --no-ignore"
 
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$HOME/.bun/bin:$PATH"
@@ -146,3 +147,6 @@ create_folder_file() {
 ### End of Zinit's installer chunk
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
