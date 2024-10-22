@@ -2,7 +2,7 @@
   {
     "context": "Editor",
     "bindings": {
-      "alt-j": "editor::SelectLargerSyntaxNode",
+      "cmd-k": "editor::SelectLargerSyntaxNode",
       "alt-k": "editor::SelectSmallerSyntaxNode"
     }
   }

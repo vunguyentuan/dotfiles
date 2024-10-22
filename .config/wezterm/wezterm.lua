@@ -31,6 +31,7 @@ config.freetype_load_flags = "NO_HINTING"
 
 config.enable_kitty_keyboard = true
 config.use_dead_keys = false
+config.cursor_blink_rate = 0
 
 config.set_environment_variables = {
   PATH =  wezterm.home_dir.. '/.volta/bin:' .. wezterm.home_dir .. '/.config/scripts:' .. '/opt/homebrew/bin:' .. os.getenv('PATH')
@@ -40,7 +41,7 @@ require("gui").apply_to_config(config)
 
 local tab_bar = require("tab-bar")
 
-wezterm.on("update-status", tab_bar.on_update_status)
+-- wezterm.on("update-status", tab_bar.on_update_status)
 
 wezterm.on("format-tab-title", tab_bar.on_format_tab_title)
 

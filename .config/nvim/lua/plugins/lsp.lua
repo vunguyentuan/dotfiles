@@ -11,15 +11,12 @@ return {
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/lazydev.nvim',
     'folke/trouble.nvim',
-    'dmmulroy/ts-error-translator.nvim'
+    -- 'dmmulroy/ts-error-translator.nvim',
+    -- "pmizio/typescript-tools.nvim",
   },
   config = function()
-    require("ts-error-translator").setup()
-
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-      require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
-      vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
-    end
+    -- require("ts-error-translator").setup()
+    -- local ts_tools = require("typescript-tools")
 
     local on_attach = function(client, bufnr)
       if client.server_capabilities.documentHighlightProvider then
@@ -52,8 +49,12 @@ return {
       nmap('<leader>a', vim.lsp.buf.code_action, '[C]ode [A]ction')
       -- vim.keymap.set({ 'n', 'v' }, '<leader>a', '<cmd>lua vim.lsp.buf.code_action<CR>')
 
-      nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-      nmap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
+      nmap('gd', function()
+        require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
+      end, '[G]oto [D]efinition')
+      nmap('gr', function()
+        require("fzf-lua").lsp_references({ ignore_current_line = true, includeDeclaration = false })
+      end, '[G]oto [R]eferences')
       nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
       nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
@@ -67,6 +68,41 @@ return {
       vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
       vim.keymap.set('n', '<leader>ww', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
     end
+
+    -- setup typescript-tools
+    -- ts_tools.setup({
+    --   handlers = {
+    --     ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    --       border = "rounded",
+    --     }),
+    --     ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+    --       -- require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
+    --       vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+    --     end
+
+    --   },
+    --   on_attach = function(client, bufnr)
+    --     client.server_capabilities.documentFormattingProvider = false
+    --     client.server_capabilities.documentRangeFormattingProvider = false
+
+    --     on_attach(client, bufnr)
+    --   end,
+    --   settings = {
+    --     -- array of strings("fix_all"|"add_missing_imports"|"remove_unused"|
+    --     -- "remove_unused_imports"|"organize_imports") -- or string "all"
+    --     -- to include all supported code actions
+    --     -- specify commands exposed as code_actions
+    --     expose_as_code_action = "all",
+
+    --     separate_diagnostic_server = true,
+    --     composite_mode = "separate_diagnostic",
+    --     publish_diagnostic_on = "insert_leave",
+    --     -- tsserver_logs = "verbose",
+    --     tsserver_file_preferences = {
+    --       importModuleSpecifierPreference = "non-relative",
+    --     },
+    --   },
+    -- })
 
     local servers = {
       -- clangd = {},
@@ -83,6 +119,11 @@ return {
       emmet_language_server = {},
       tailwindcss = {
         tailwindCSS = {
+          classAttributes = {
+            "class",
+            "className",
+            "classNames"
+          },
           experimental = {
             classRegex = {
               { 'tv\\((([^()]*|\\([^()]*\\))*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
@@ -95,14 +136,15 @@ return {
       cssls = {},
       cssmodules_ls = {},
       vtsls = {
+        autoUseWorkspaceTsdk = true,
         enableMoveToFileCodeAction = false,
         format = { enable = false },
 
         typescript = {
-          preferGoToSourceDefinition = true,
+          -- preferGoToSourceDefinition = true,
           importModuleSpecifierPreference = "non-relative",
           preferences = {
-            preferGoToSourceDefinition = true,
+            -- preferGoToSourceDefinition = true,
             importModuleSpecifierPreference = "non-relative",
           },
         },
@@ -148,7 +190,7 @@ return {
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     -- Ensure the servers above are installed
     local mason_lspconfig = require 'mason-lspconfig'

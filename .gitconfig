@@ -1,28 +1,20 @@
 [user]
   name = Vu Nguyen
 	email = tuanvu.vn007@gmail.com
+	signingkey = 83D7DBDD7D3BFE9F
 
-[core]
-    pager = delta
+[diff]
+        tool = difftastic
+        external = difft
 
-[interactive]
-    diffFilter = delta --color-only --features=interactive
+[difftool]
+        prompt = false
 
-[delta]
-    features = decorations
-    side-by-side = true
+[difftool "difftastic"]
+        cmd = difft "$LOCAL" "$REMOTE"
 
-[delta "interactive"]
-    keep-plus-minus-markers = false
-
-[delta "decorations"]
-    commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-line-number-style = "#067a00"
-    hunk-header-style = file line-number syntax
+[pager]
+  difftool = true
 
 [alias]
     mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -

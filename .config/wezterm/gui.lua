@@ -3,8 +3,8 @@ local wezterm = require("wezterm")
 local gui = {}
 
 function gui.apply_to_config(config)
-	config.max_fps = 120
-	config.animation_fps = 60
+	-- config.max_fps = 120
+	-- config.animation_fps = 60
 
 	config.color_scheme = "Catppuccin Mocha"
 	-- config.color_scheme = "carbonfox"
@@ -23,7 +23,7 @@ function gui.apply_to_config(config)
 	config.line_height = 1.2
 
 	config.inactive_pane_hsb = {
-		saturation = 0.1,
+		-- saturation = 0.1,
 		brightness = 0.5,
 	}
 

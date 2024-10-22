@@ -2,3 +2,6 @@
     name = Vu Nguyen
     email = vu.nguyen2@cognizant.com
 
+[commit]
+gpgsign = true
+

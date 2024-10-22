@@ -15,3 +15,7 @@ helix/runtimes
 .config/tmux/plugins
 .config/zed/prompts/prompts-library-db.0.mdb
 .config/fish/completions
+.config/containers/podman/machine/applehv
+.config/containers/podman-connections.json.lock
+.config/karabiner/automatic_backups
+.config/kitty/meow

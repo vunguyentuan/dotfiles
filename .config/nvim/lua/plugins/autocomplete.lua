@@ -1,6 +1,7 @@
 return {
   {
     'L3MON4D3/LuaSnip',
+    -- enabled = false,
     build = (not jit.os:find 'Windows') and
         "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp" or nil,
     -- enabled = false,
@@ -31,8 +32,10 @@ return {
   },
   -- auto completion
   {
-    'hrsh7th/nvim-cmp',
-    version = false, -- last release is way too old
+    -- 'hrsh7th/nvim-cmp',
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
+    -- version = false, -- last release is way too old
     -- enabled = false,
     event = 'LspAttach',
     dependencies = {
@@ -134,10 +137,10 @@ return {
         },
         sources = cmp.config.sources {
           -- { name = 'copilot' },
-          { name = "supermaven" },
 
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = "supermaven" },
           { name = 'buffer' },
           { name = 'path' },
         },

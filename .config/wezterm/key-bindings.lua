@@ -214,9 +214,9 @@ function keys.apply_to_config(config)
   end
 
   local keyPathPairs = {
-    r = "Projects/Govtech/pulsebackend",
-    e = "Projects/Govtech/pulseagencyportal",
-    w = "Projects/Govtech/pulseportal",
+    r = "Projects/Govtech/gowherecp",
+    e = "Projects/Govtech/diygowhere",
+    w = "Projects/Govtech/crowdtasksgwebfrontend",
     q = "Projects/Govtech/crowdtasksgbackend",
     t = "Projects/Govtech/crowdtaskcitizenportal",
   }

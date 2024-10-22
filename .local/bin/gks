@@ -17,4 +17,4 @@ if [[ -z $selected ]]; then
 fi
 
 aws eks --region ap-southeast-1 update-kubeconfig --name $selected
-k9s
+k9s --readonly
