@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 local gui = {}
 
 function gui.apply_to_config(config)
-	-- config.max_fps = 120
+	config.max_fps = 120
 	-- config.animation_fps = 60
 
 	config.color_scheme = "Catppuccin Mocha"

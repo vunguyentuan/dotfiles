@@ -13,6 +13,13 @@
 [difftool "difftastic"]
         cmd = difft "$LOCAL" "$REMOTE"
 
+[merge]
+  tool = nvim
+[mergetool "nvim"]
+  cmd = nvim -c "DiffviewOpen"
+[mergetool]
+  prompt = false
+
 [pager]
   difftool = true
 

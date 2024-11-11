@@ -19,3 +19,4 @@ helix/runtimes
 .config/containers/podman-connections.json.lock
 .config/karabiner/automatic_backups
 .config/kitty/meow
+.config/containers/podman-connections.json

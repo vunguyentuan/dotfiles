@@ -7,7 +7,12 @@ return {
     require('mini.statusline').setup()
     require('mini.move').setup()
     require('mini.indentscope').setup()
-    require('mini.ai').setup()
+
+    require('mini.ai').setup({
+      custom_textobjects = {
+        t = false
+      }
+    })
 
     local win_config = function()
       local height = math.floor(0.618 * vim.o.lines)
