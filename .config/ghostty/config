@@ -38,9 +38,9 @@ keybind = ctrl+alt+shift+w=text:\x01W
 keybind = ctrl+alt+shift+q=text:\x01Q
 
 # resize pane
-keybind = ctrl+alt+shift+h=text:\x01Q
+keybind = ctrl+alt+shift+h=text:\x01H
 
-# switch tabssummarize
+# switch tabs
 keybind = super+1=text:\x011
 keybind = super+2=text:\x012
 keybind = super+3=text:\x013
@@ -61,12 +61,12 @@ keybind = shift+page_up=adjust_selection:page_up
 keybind = shift+right=adjust_selection:right
 keybind = shift+up=adjust_selection:up
 keybind = super+a=select_all
-keybind = super+c=copy_to_clipboard
+# keybind = super+c=copy_to_clipboard
+# keybind = super+k=clear_screen
 keybind = super+comma=open_config
 keybind = super+end=scroll_to_bottom
 keybind = super+equal=increase_font_size:1
 keybind = super+home=scroll_to_top
-keybind = super+k=clear_screen
 keybind = super+left_bracket=goto_split:previous
 keybind = super+minus=decrease_font_size:1
 keybind = super+page_down=scroll_page_down
