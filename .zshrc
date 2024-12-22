@@ -145,8 +145,8 @@ create_folder_file() {
 }
 
 ### End of Zinit's installer chunk
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+# FNM
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

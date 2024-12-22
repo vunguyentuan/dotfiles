@@ -3,8 +3,15 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(zoxide query -l | rg -v "Library" | awk '{ print substr($0,match($0,"/[^/]*$")+1) "\t" $0 }' | fzf --with-nth=1 --bind 'ctrl-x:execute:less {2}' --no-sort | awk -F'\t' '{print $2}')
+    # selected=$(zoxide query -l | rg -v "Library" | awk '{ print substr($0,match($0,"/[^/]*$")+1) "\t" $0 }' | fzf --with-nth=1 --bind 'ctrl-x:execute:less {2}' --no-sort | awk -F'\t' '{print $2}')
+
+
+    selected=$(wezterm-workspaces.sh | fzf --with-nth 1 --bind='enter:become(echo {2})'
+)
 fi
+
+# echo $selected
+# exit 0
 
 if [[ -z $selected ]]; then
     exit 0
