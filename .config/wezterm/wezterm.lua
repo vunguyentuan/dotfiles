@@ -45,6 +45,31 @@ local tab_bar = require("tab-bar")
 
 wezterm.on("format-tab-title", tab_bar.on_format_tab_title)
 
+wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
+  local zoomed = ""
+  if tab.active_pane.is_zoomed then
+    zoomed = "[Z] "
+  end
+
+  local index = ""
+  if #tabs > 1 then
+    index = string.format("[%d/%d] ", tab.tab_index + 1, #tabs)
+  end
+
+  local cwd = ""
+  if pane.current_working_dir then
+    local uri = tostring(pane.current_working_dir)
+    if string.find(uri, "file://") then
+      cwd = string.gsub(uri, "file://[^/]*", "")
+    end
+    if cwd ~= "" then
+      cwd = " - " .. cwd
+    end
+  end
+
+  return zoomed .. index .. tab.active_pane.title .. cwd
+end)
+
 tab_bar.apply_to_config(config)
 
 -- local toggles = require("toggles")

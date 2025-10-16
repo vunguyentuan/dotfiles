@@ -15,6 +15,7 @@
 .config/raycast/extensions/
 .config/tmux/plugins
 .config/zed/embeddings/
+.config/zed/conversations/
 .config/zed/prompts/prompts-library-db.0.mdb
 .local/share/fnm
 .local/share/karabiner/log
@@ -26,3 +27,11 @@ node_modules
 tmux/plugins
 .local/share
 .local/state
+.config/github-copilot/apps.json
+.config/uv
+.config/uv
+.local
+qdrant_storage
+.zshrc.local
+.config/stripe/config.toml
+.local/bin/wezterm-workspaces.sh

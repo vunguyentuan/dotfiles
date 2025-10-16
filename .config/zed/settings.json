@@ -7,14 +7,25 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "assistant": {
+  "edit_predictions": {
+    "mode": "eager",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null
+    },
+    "enabled_in_text_threads": false
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "agent": {
+    "default_profile": "write",
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
-    },
-    "version": "2"
+      "model": "claude-3-7-sonnet-latest"
+    }
   },
-  "theme": "Catppuccin Macchiato",
+  "theme": "One Dark",
   "telemetry": {
     "diagnostics": false,
     "metrics": false
@@ -24,5 +35,21 @@
     "font_family": "FiraCode Nerd Font",
     "blinking": "off"
   },
-  "vim_mode": true
+  "vim_mode": true,
+  "lsp": {
+    "sourcekit-lsp": {
+      "binary": {
+        "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"
+      }
+    }
+  },
+  "format_on_save": "off",
+  "languages": {
+    "Swift": {
+      "enable_language_server": true,
+      "language_servers": ["sourcekit-lsp"],
+      "formatter": "language_server",
+      "format_on_save": "off"
+    }
+  }
 }

@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/vunguyen/.zsh/completions:"* ]]; then export FPATH="/Users/vunguyen/.zsh/completions:$FPATH"; fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -73,7 +75,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias c='clear'
@@ -96,10 +98,10 @@ export LC_ALL=en_US.UTF-8
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+# eval "$(zoxide init --cmd cd zsh)"
 
 export EDITOR="nvim" # or "vim", or "code", etc.
-export AWS_PROFILE="ctsg"
+export AWS_PROFILE="wisory"
 
 export GPG_TTY=$(tty)
 export NNN_OPENER="nnn-hx.sh"
@@ -126,7 +128,7 @@ function cdbstg(){
 }
 
 if [[ $(uname) == "Darwin" ]]; then
-  export PATH="$(brew --prefix python)/libexec/bin:$PATH"
+  export PATH="$(brew --prefix python@3.12)/libexec/bin:$PATH"
   export PATH="$HOME/Library/Python/3.11/bin:$PATH"
   export PNPM_HOME=$HOME/Library/pnpm
   export PATH="$PNPM_HOME:$PATH"
@@ -146,7 +148,42 @@ create_folder_file() {
 
 ### End of Zinit's installer chunk
 # FNM
-eval "$(fnm env --use-on-cd --shell zsh)"
+eval "$(fnm env --use-on-cd --shell zsh --log-level quiet)"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# pnpm
+export PNPM_HOME="/Users/vunguyen/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/vunguyen/.cache/lm-studio/bin"
+export PATH="$PATH:/Users/vunguyen/Library/Python/3.12/bin"
+
+# . "/Users/vunguyen/.deno/env"
+
+# env
+
+# Load private environment variables if the file exists
+if [[ -f ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
+
+# Added by Windsurf
+export PATH="/Users/vunguyen/.codeium/windsurf/bin:$PATH"
+# Go  bin
+export PATH="/Users/vunguyen/go/bin:$PATH"
+
+# eval "$(zoxide init zsh)"
+
+export RESOLVE_SCRIPT_API="/Library/Application Support/Blackmagic Design/DaVinci Resolve/Developer/Scripting"
+export RESOLVE_SCRIPT_LIB="/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/fusionscript.so"
+export PYTHONPATH="$PYTHONPATH:$RESOLVE_SCRIPT_API/Modules/"
+
+# opencode
+export PATH=/Users/vunguyen/.opencode/bin:$PATH

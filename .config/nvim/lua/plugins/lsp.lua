@@ -1,12 +1,12 @@
 return {
   'neovim/nvim-lspconfig',
-  event = "VeryLazy",
+  event = 'VeryLazy',
   dependencies = {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
 
     -- Useful status updates for LSP
-    { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+    { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/lazydev.nvim',
@@ -49,12 +49,8 @@ return {
       nmap('<leader>a', vim.lsp.buf.code_action, '[C]ode [A]ction')
       -- vim.keymap.set({ 'n', 'v' }, '<leader>a', '<cmd>lua vim.lsp.buf.code_action<CR>')
 
-      nmap('gd', function()
-        require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
-      end, '[G]oto [D]efinition')
-      nmap('gr', function()
-        require("fzf-lua").lsp_references({ ignore_current_line = true, includeDeclaration = false })
-      end, '[G]oto [R]eferences')
+      nmap('gd', Snacks.picker.lsp_definitions, '[G]oto [D]efinition')
+      nmap('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
       nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
       nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
@@ -120,41 +116,41 @@ return {
       tailwindcss = {
         tailwindCSS = {
           classAttributes = {
-            "class",
-            "className",
-            "classNames"
+            'class',
+            'className',
+            'classNames',
           },
           experimental = {
             classRegex = {
               { 'tv\\((([^()]*|\\([^()]*\\))*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
-              { 'cva\\(([^)]*)\\)',                 '["\'`]([^"\'`]*).*?["\'`]' },
-              { 'cx\\(([^)]*)\\)',                  "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+              { 'cva\\(([^)]*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
+              { 'cx\\(([^)]*)\\)', "(?:'|\"|`)([^']*)(?:'|\"|`)" },
             },
           },
         },
       },
       cssls = {},
       cssmodules_ls = {},
-      vtsls = {
+      ts_ls = {
         autoUseWorkspaceTsdk = true,
         enableMoveToFileCodeAction = false,
         format = { enable = false },
 
         typescript = {
           -- preferGoToSourceDefinition = true,
-          importModuleSpecifierPreference = "non-relative",
+          importModuleSpecifierPreference = 'non-relative',
           preferences = {
             -- preferGoToSourceDefinition = true,
-            importModuleSpecifierPreference = "non-relative",
+            importModuleSpecifierPreference = 'non-relative',
           },
         },
 
         experimental = {
           completion = {
             enableServerSideFuzzyMatch = true,
-            entriesLimit = 20
-          }
-        }
+            entriesLimit = 20,
+          },
+        },
       },
 
       -- harper_ls = {},
