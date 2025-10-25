@@ -4,7 +4,6 @@ theme = "vu"
 true-color = true
 color-modes = true
 idle-timeout = 75
-evil = true
 
 [editor.file-picker]
 hidden = false
