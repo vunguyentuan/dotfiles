@@ -187,3 +187,15 @@ export PYTHONPATH="$PYTHONPATH:$RESOLVE_SCRIPT_API/Modules/"
 
 # opencode
 export PATH=/Users/vunguyen/.opencode/bin:$PATH
+
+# Added by Antigravity
+export PATH="/Users/vunguyen/.antigravity/antigravity/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/vunguyen/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/vunguyen/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/vunguyen/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/vunguyen/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Added by Antigravity
+export PATH="/Users/vunguyen/.antigravity/antigravity/bin:$PATH"

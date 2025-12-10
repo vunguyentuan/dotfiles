@@ -35,3 +35,4 @@ qdrant_storage
 .zshrc.local
 .config/stripe/config.toml
 .local/bin/wezterm-workspaces.sh
+.config/gcloud
