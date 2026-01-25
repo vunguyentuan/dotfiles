@@ -23,35 +23,13 @@ function gui.apply_to_config(config)
 	config.line_height = 1.2
 
 	config.inactive_pane_hsb = {
-		-- saturation = 0.1,
 		brightness = 0.5,
 	}
-
-	-- config.background = {
-	-- 	-- deepest layer
-	-- 	{
-	-- 		source = {
-	-- 			File = wezterm.home_dir .. "/.config/wezterm/sword-red.png",
-	-- 		},
-	-- 		hsb = { brightness = 0.03, saturation = 1.02 },
-	-- 		opacity = 0.95,
-	-- 	},
-	-- 	-- more layers can be added here
-	-- }
-
-	-- config.color is set in tab-bar
 
 	config.macos_window_background_blur = 10
 
 	-- background of special text (e.g. which-key in nvim)
 	config.text_background_opacity = 0.4
-
-	-- config.window_padding = {
-	--     left = 0,
-	--     right = 0,
-	--     top = 0,
-	--     bottom = 0,
-	-- }
 end
 
 return gui

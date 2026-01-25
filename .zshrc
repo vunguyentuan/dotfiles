@@ -169,6 +169,9 @@ export PATH="$PATH:/Users/vunguyen/Library/Python/3.12/bin"
 
 # env
 
+# Update terminal title with current directory (for tmux/ghostty)
+precmd() { printf '\033]2;%s\033\\' "${PWD/#$HOME/~}" }
+
 # Load private environment variables if the file exists
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
@@ -199,3 +202,9 @@ if [ -f '/Users/vunguyen/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then 
 
 # Added by Antigravity
 export PATH="/Users/vunguyen/.antigravity/antigravity/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/vunguyen/.antigravity/antigravity/bin:$PATH"
+
+# Amp CLI
+export PATH="/Users/vunguyen/.amp/bin:$PATH"

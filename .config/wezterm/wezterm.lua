@@ -7,11 +7,10 @@ if wezterm.config_builder then
 end
 
 
+config.use_ime = false
 config.freetype_load_flags = "NO_HINTING"
-
 config.enable_kitty_keyboard = true
 config.use_dead_keys = false
-config.cursor_blink_rate = 0
 
 config.set_environment_variables = {
   PATH =  wezterm.home_dir.. '/.volta/bin:' .. wezterm.home_dir .. '/.config/scripts:' .. '/opt/homebrew/bin:' .. os.getenv('PATH')

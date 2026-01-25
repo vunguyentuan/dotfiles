@@ -45,6 +45,9 @@ function keys.apply_to_config(config)
 
   config.keys = {
     {
+      key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}
+    },
+    {
       key = "f",
       mods = "CMD|CTRL",
       action = wezterm.action_callback(function(win, pane)

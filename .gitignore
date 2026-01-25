@@ -36,3 +36,7 @@ qdrant_storage
 .config/stripe/config.toml
 .local/bin/wezterm-workspaces.sh
 .config/gcloud
+.config/mole
+.config/amp
+.config/doom
+.config/emacs
