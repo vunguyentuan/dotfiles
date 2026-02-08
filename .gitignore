@@ -17,9 +17,6 @@
 .config/zed/embeddings/
 .config/zed/conversations/
 .config/zed/prompts/prompts-library-db.0.mdb
-.local/share/fnm
-.local/share/karabiner/log
-.local/share/karabiner/pid
 .log
 .tmp*
 helix/runtimes
@@ -29,14 +26,13 @@ tmux/plugins
 .local/state
 .config/github-copilot/apps.json
 .config/uv
-.config/uv
-.local
 qdrant_storage
 .zshrc.local
 .config/stripe/config.toml
-.local/bin/wezterm-workspaces.sh
 .config/gcloud
 .config/mole
 .config/amp
 .config/doom
 .config/emacs
+.local/bin/amp
+.local/bin/claude

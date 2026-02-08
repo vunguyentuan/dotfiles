@@ -8,14 +8,9 @@ function workspace.apply_to_config(config)
 end
 
 function workspace.quick_picker(window, pane)
-    -- wezterm.home_dir = '/Users/daniel'
     local success, stdout, stderr = wezterm.run_child_process {
         'wezterm-workspaces.sh'
     }
-    -- -- set_environment_variables somewhere here? to avoid writing full brew path in the script
-    -- set_environment_variables = {
-    --     PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
-    -- }
     local workspaces = {}
 
     if success then
@@ -62,7 +57,7 @@ end
 function workspace.fuzzy_picker(window, pane)
     -- wezterm.home_dir = '/Users/daniel'
     local success, stdout, stderr = wezterm.run_child_process {
-        wezterm.home_dir .. '/.config/scripts/wezterm-workspaces.sh'
+        wezterm.home_dir .. '/.local/bin/wezterm-workspaces.sh'
     }
     -- -- set_environment_variables somewhere here? to avoid writing full brew path in the script
     -- set_environment_variables = {
