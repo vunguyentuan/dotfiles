@@ -1,7 +1,6 @@
 git:
-  paging:
-    externalDiffCommand: difft --color=always
-
-
+  diffRenderers:
+    - command: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+      type: stdinFilter
 status:
   showUntrackedFiles: no

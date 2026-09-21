@@ -32,6 +32,9 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light ajeetdsouza/zoxide
+ 
+
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -75,7 +78,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
 
 # Aliases
 alias c='clear'
@@ -98,7 +101,6 @@ export LC_ALL=en_US.UTF-8
 
 # Shell integrations
 eval "$(fzf --zsh)"
-# eval "$(zoxide init --cmd cd zsh)"
 
 export EDITOR="nvim" # or "vim", or "code", etc.
 export AWS_PROFILE="wisory"
@@ -181,8 +183,6 @@ fi
 export PATH="/Users/vunguyen/.codeium/windsurf/bin:$PATH"
 # Go  bin
 export PATH="/Users/vunguyen/go/bin:$PATH"
-
-# eval "$(zoxide init zsh)"
 
 export RESOLVE_SCRIPT_API="/Library/Application Support/Blackmagic Design/DaVinci Resolve/Developer/Scripting"
 export RESOLVE_SCRIPT_LIB="/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/fusionscript.so"
